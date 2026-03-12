@@ -29,10 +29,8 @@ app.use(helmet());
 // CORS configuration for Next.js frontend
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-    credentials: true, // Allow cookies
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: "*",
+    credentials: true, 
   })
 );
 
