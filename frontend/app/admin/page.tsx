@@ -69,11 +69,16 @@ const enquiryStatusStyles: Record<EnquiryStatus, string> = {
 };
 
 export default function AdminPage() {
+  const BLOGS_PER_PAGE = 2;
   const router = useRouter();
   const { user, isReady, login, logout } = useAuth();
   const [activeTab, setActiveTab] = useState<AdminTab>('overview');
   const [jobs, setJobs] = useState<AdminJob[]>([]);
   const [blogs, setBlogs] = useState<AdminBlog[]>([]);
+  const [blogListings, setBlogListings] = useState<AdminBlog[]>([]);
+  const [blogListingPage, setBlogListingPage] = useState(1);
+  const [blogListingPages, setBlogListingPages] = useState(1);
+  const [blogListingTotal, setBlogListingTotal] = useState(0);
   const [subAdmins, setSubAdmins] = useState<SubAdminUser[]>([]);
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [enquiries, setEnquiries] = useState<AdminEnquiry[]>([]);
@@ -86,6 +91,7 @@ export default function AdminPage() {
   const [editingJobId, setEditingJobId] = useState('');
   const [editingBlogId, setEditingBlogId] = useState('');
   const [loadingDashboard, setLoadingDashboard] = useState(false);
+  const [loadingBlogs, setLoadingBlogs] = useState(false);
   const [loadingApplications, setLoadingApplications] = useState(false);
   const [loadingEnquiries, setLoadingEnquiries] = useState(false);
   const [updatingApplicationId, setUpdatingApplicationId] = useState('');
@@ -122,6 +128,14 @@ export default function AdminPage() {
     void loadEnquiries(enquiryPage, enquiryStatusFilter, enquirySearch);
   }, [enquiryPage, enquirySearch, enquiryStatusFilter, isReady, user]);
 
+  useEffect(() => {
+    if (!isReady || !isAdminUser(user)) {
+      return;
+    }
+
+    void loadBlogListings(blogListingPage);
+  }, [blogListingPage, isReady, user]);
+
   async function refreshDashboard() {
     if (!isAdminUser(user)) {
       return;
@@ -133,13 +147,13 @@ export default function AdminPage() {
     try {
       const [jobData, blogData, subAdminData, enquiryData] = await Promise.all([
         getAdminJobs(),
-        getAdminBlogs(),
+        getAdminBlogs({ page: 1, limit: 200 }),
         user.role === 'ADMIN' ? getSubAdmins() : Promise.resolve([]),
         getAdminEnquiries({ page: 1, limit: 10 }),
       ]);
 
       setJobs(jobData);
-      setBlogs(blogData);
+      setBlogs(blogData.blogs);
       setSubAdmins(subAdminData);
       setEnquiries(enquiryData.enquiries);
       setEnquiryTotal(enquiryData.pagination.total);
@@ -153,6 +167,21 @@ export default function AdminPage() {
       setPageError(error instanceof Error ? error.message : 'Unable to load admin dashboard.');
     } finally {
       setLoadingDashboard(false);
+    }
+  }
+
+  async function loadBlogListings(page: number) {
+    setLoadingBlogs(true);
+
+    try {
+      const data = await getAdminBlogs({ page, limit: BLOGS_PER_PAGE });
+      setBlogListings(data.blogs);
+      setBlogListingTotal(data.pagination.total);
+      setBlogListingPages(data.pagination.pages);
+    } catch (error) {
+      setPageError(error instanceof Error ? error.message : 'Unable to load blog listings.');
+    } finally {
+      setLoadingBlogs(false);
     }
   }
 
@@ -258,6 +287,8 @@ export default function AdminPage() {
       });
       formElement.reset();
       setActionMessage('Blog created successfully.');
+      setBlogListingPage(1);
+      await loadBlogListings(1);
       await refreshDashboard();
     } catch (error) {
       setPageError(error instanceof Error ? error.message : 'Unable to create blog.');
@@ -307,6 +338,7 @@ export default function AdminPage() {
       });
       setEditingBlogId('');
       setActionMessage('Blog updated successfully.');
+      await loadBlogListings(blogListingPage);
       await refreshDashboard();
     } catch (error) {
       setPageError(error instanceof Error ? error.message : 'Unable to update blog.');
@@ -347,6 +379,10 @@ export default function AdminPage() {
         setEditingBlogId('');
       }
       setActionMessage('Blog deleted successfully.');
+      const currentPageWillBeEmpty = blogListings.length === 1 && blogListingPage > 1;
+      const nextPage = currentPageWillBeEmpty ? blogListingPage - 1 : blogListingPage;
+      setBlogListingPage(nextPage);
+      await loadBlogListings(nextPage);
       await refreshDashboard();
     } catch (error) {
       setPageError(error instanceof Error ? error.message : 'Unable to delete blog.');
@@ -872,10 +908,13 @@ export default function AdminPage() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      {blogs.length === 0 && (
+                      {loadingBlogs && (
+                        <p className="text-sm text-slate-600">Loading blog listings...</p>
+                      )}
+                      {!loadingBlogs && blogListings.length === 0 && (
                         <p className="text-sm text-slate-600">No blogs found in the backend yet.</p>
                       )}
-                      {blogs.map((blog) => (
+                      {!loadingBlogs && blogListings.map((blog) => (
                         <div key={blog._id} className="rounded-2xl border border-slate-200 p-4">
                           {editingBlogId === blog._id ? (
                             <form onSubmit={(event) => handleUpdateBlog(event, blog._id)} className="space-y-3">
@@ -947,6 +986,38 @@ export default function AdminPage() {
                           )}
                         </div>
                       ))}
+                      {!loadingBlogs && blogListingPages > 1 && (
+                        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-2">
+                          <p className="text-sm text-slate-600">
+                            Showing {blogListings.length} of {blogListingTotal} blogs on page{' '}
+                            {blogListingPage} of {blogListingPages}.
+                          </p>
+                          <div className="flex gap-2">
+                            <Button
+                              type="button"
+                              variant="outline"
+                              disabled={blogListingPage <= 1 || loadingBlogs}
+                              onClick={() =>
+                                setBlogListingPage((current) => Math.max(1, current - 1))
+                              }
+                            >
+                              Previous
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              disabled={blogListingPage >= blogListingPages || loadingBlogs}
+                              onClick={() =>
+                                setBlogListingPage((current) =>
+                                  Math.min(blogListingPages, current + 1)
+                                )
+                              }
+                            >
+                              Next
+                            </Button>
+                          </div>
+                        </div>
+                      )}
                     </CardContent>
                   </Card>
                 </div>

@@ -52,7 +52,7 @@ export function BlogModal({
       onClick={onClose}
     >
       <div
-        className="relative my-6 w-full max-w-4xl overflow-hidden rounded-[32px] bg-white shadow-[0_32px_100px_rgba(15,23,42,0.35)]"
+        className="relative my-6 w-full max-w-6xl overflow-hidden rounded-[32px] bg-white shadow-[0_32px_100px_rgba(15,23,42,0.35)]"
         onClick={(event) => event.stopPropagation()}
       >
         <button
@@ -64,37 +64,61 @@ export function BlogModal({
           <X className="h-5 w-5" />
         </button>
 
-        <div className="relative h-64 w-full sm:h-80">
-          <Image
-            src={blog.featuredImage || BLOG_FALLBACK_IMAGE}
-            alt={blog.title}
-            fill
-            className="object-cover"
-            unoptimized
-          />
-        </div>
-
-        <div className="max-h-[calc(100vh-12rem)] overflow-y-auto px-5 py-6 sm:px-8 sm:py-8">
-          <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
-            <span className="rounded-full bg-sky-50 px-3 py-1 font-medium text-sky-700">
-              Healthcare Blog
-            </span>
-            <span>{formatDate(blog.createdAt)}</span>
-            {blog.createdBy?.name && <span>By {blog.createdBy.name}</span>}
+        <div className="grid max-h-[calc(100vh-4rem)] grid-cols-1 overflow-hidden lg:grid-cols-[minmax(320px,420px)_1fr]">
+          <div className="relative min-h-[420px] bg-[#06152e] p-4 sm:p-5">
+            <button
+              type="button"
+              onClick={() => window.open(blog.featuredImage || BLOG_FALLBACK_IMAGE, '_blank', 'noopener,noreferrer')}
+              className="group relative block h-full w-full overflow-hidden rounded-[28px] text-left"
+              aria-label={`Open full image for ${blog.title}`}
+            >
+              <div className="absolute inset-x-8 top-4 h-24 rounded-full bg-[#7CC6FF]/25 blur-3xl transition-opacity duration-500 group-hover:opacity-90" />
+              <div className="relative h-full min-h-[390px] w-full overflow-hidden rounded-[28px]">
+                <Image
+                  src={blog.featuredImage || BLOG_FALLBACK_IMAGE}
+                  alt={blog.title}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  unoptimized
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#04101f]/92 via-[#04101f]/28 to-white/5" />
+                <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                  <span className="inline-flex rounded-full border border-white/20 bg-white/12 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] backdrop-blur-sm">
+                    Click Image
+                  </span>
+                  <p className="mt-3 line-clamp-3 text-xl font-semibold leading-tight sm:text-2xl">
+                    {blog.title}
+                  </p>
+                  <p className="mt-2 text-xs uppercase tracking-[0.22em] text-white/70">
+                    {formatDate(blog.createdAt)}
+                  </p>
+                </div>
+              </div>
+            </button>
           </div>
 
-          <h2 className="mt-4 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-            {blog.title}
-          </h2>
+          <div className="max-h-[calc(100vh-4rem)] overflow-y-auto px-5 py-6 sm:px-8 sm:py-8">
+            <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
+              <span className="rounded-full bg-sky-50 px-3 py-1 font-medium text-sky-700">
+                Healthcare Blog
+              </span>
+              <span>{formatDate(blog.createdAt)}</span>
+              {blog.createdBy?.name && <span>By {blog.createdBy.name}</span>}
+            </div>
 
-          {blog.metaDescription && (
-            <p className="mt-4 text-base leading-7 text-slate-600">{blog.metaDescription}</p>
-          )}
+            <h2 className="mt-4 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+              {blog.title}
+            </h2>
 
-          <div
-            className="prose prose-slate mt-8 max-w-none"
-            dangerouslySetInnerHTML={{ __html: blog.content }}
-          />
+            {blog.metaDescription && (
+              <p className="mt-4 text-base leading-7 text-slate-600">{blog.metaDescription}</p>
+            )}
+
+            <div
+              className="prose prose-slate mt-8 max-w-none"
+              dangerouslySetInnerHTML={{ __html: blog.content }}
+            />
+          </div>
         </div>
       </div>
     </div>

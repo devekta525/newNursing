@@ -44,16 +44,41 @@ export function BlogCard({
   onReadMore: (blog: PublicBlog) => void;
 }) {
   return (
-    <Card className="group flex h-full flex-col overflow-hidden rounded-[28px] border-slate-200 bg-white py-0 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(15,23,42,0.12)]">
-      <div className="relative h-56 w-full overflow-hidden">
-        <Image
-          src={blog.featuredImage || BLOG_FALLBACK_IMAGE}
-          alt={blog.title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          unoptimized
-        />
-      </div>
+    <Card className="group flex h-full flex-col overflow-hidden rounded-[30px] border-slate-200/80 bg-white py-0 shadow-[0_20px_60px_-32px_rgba(15,23,42,0.24)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_28px_80px_-32px_rgba(11,44,106,0.35)]">
+      <button
+        type="button"
+        onClick={() => onReadMore(blog)}
+        className="block w-full text-left"
+        aria-label={`Open ${blog.title}`}
+      >
+        <div className="relative p-3">
+          <div className="absolute inset-x-7 top-3 h-24 rounded-full bg-[#7CC6FF]/20 blur-3xl transition-opacity duration-500 group-hover:opacity-90" />
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[26px] bg-slate-100">
+            <Image
+              src={blog.featuredImage || BLOG_FALLBACK_IMAGE}
+              alt={blog.title}
+              fill
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+              unoptimized
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#071833]/92 via-[#071833]/22 to-white/0 opacity-95 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/20 to-transparent opacity-70" />
+            <div className="absolute inset-x-0 bottom-0 px-5 pb-5 pt-10 text-white">
+              <div className="flex items-center justify-between gap-3">
+                <span className="rounded-full border border-white/20 bg-white/12 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] backdrop-blur-sm">
+                  Featured Post
+                </span>
+                <span className="text-xs uppercase tracking-[0.22em] text-white/75">
+                  {formatDate(blog.createdAt)}
+                </span>
+              </div>
+              <h2 className="mt-4 line-clamp-3 text-2xl font-semibold leading-tight text-white">
+                {blog.title}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </button>
 
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-4 flex items-center justify-between gap-3 text-sm text-slate-500">
@@ -72,7 +97,7 @@ export function BlogCard({
         <Button
           type="button"
           variant="outline"
-          className="mt-6 w-full justify-between rounded-full border-slate-200"
+          className="mt-6 w-full justify-between rounded-full border-slate-200 transition-transform duration-300 group-hover:translate-y-0.5"
           onClick={() => onReadMore(blog)}
         >
           Read More

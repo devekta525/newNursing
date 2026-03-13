@@ -102,7 +102,7 @@ type SubAdminsResponseData = {
 
 type BlogsResponseData = {
   blogs: AdminBlog[];
-  pagination?: {
+  pagination: {
     total: number;
     page: number;
     limit: number;
@@ -236,9 +236,37 @@ export async function getSubAdmins() {
   return response.data?.subAdmins ?? [];
 }
 
-export async function getAdminBlogs() {
-  const response = await request<BlogsResponseData>('/blogs');
-  return response.data?.blogs ?? [];
+export async function getAdminBlogs(params?: {
+  page?: number;
+  limit?: number;
+  status?: AdminBlog['status'];
+}) {
+  const query = new URLSearchParams();
+
+  if (params?.page) {
+    query.set('page', String(params.page));
+  }
+
+  if (params?.limit) {
+    query.set('limit', String(params.limit));
+  }
+
+  if (params?.status) {
+    query.set('status', params.status);
+  }
+
+  const suffix = query.toString() ? `?${query.toString()}` : '';
+  const response = await request<BlogsResponseData>(`/blogs${suffix}`);
+
+  return {
+    blogs: response.data?.blogs ?? [],
+    pagination: response.data?.pagination ?? {
+      total: 0,
+      page: params?.page ?? 1,
+      limit: params?.limit ?? 10,
+      pages: 1,
+    },
+  };
 }
 
 export async function createAdminBlog(payload: {

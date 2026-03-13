@@ -142,16 +142,18 @@ export default function Header() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-blue-100 bg-blue-100/70 shadow-sm backdrop-blur-md">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-20 items-center justify-between gap-4 xl:h-24">
-            <Link href="/" className="flex items-center shrink-0">
-              <Image
-                src="/logo_nursing.png"
-                alt="Nursing Sarathi"
-                width={180}
-                height={46}
-                className="w-28 sm:w-32 xl:w-[130px] object-contain"
-                priority
-              />
+          <div className="flex h-16 items-center justify-between gap-4 sm:h-[72px] xl:h-20">
+            <Link href="/" className="flex shrink-0 items-center">
+              <div className="relative h-11 w-[88px] sm:h-12 sm:w-[96px] md:h-14 md:w-[112px] xl:h-16 xl:w-[128px]">
+                <Image
+                  src="/logo_nursing_2.png"
+                  alt="Nursing Sarathi"
+                  fill
+                  className="object-contain object-left"
+                  sizes="(max-width: 639px) 88px, (max-width: 767px) 96px, (max-width: 1279px) 112px, 128px"
+                  priority
+                />
+              </div>
             </Link>
 
             <nav className="hidden xl:flex flex-1 items-center justify-center gap-1 text-[14px] font-medium flex-wrap">
@@ -224,7 +226,7 @@ export default function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-x-4 top-24 z-50 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-[28px] border border-slate-200 bg-white p-4 shadow-[0_24px_80px_rgba(15,23,42,0.22)] xl:hidden"
+              className="fixed inset-x-4 top-20 z-50 max-h-[calc(100vh-6rem)] overflow-y-auto rounded-[28px] border border-slate-200 bg-white p-4 shadow-[0_24px_80px_rgba(15,23,42,0.22)] sm:top-[88px] xl:hidden"
             >
               <div className="space-y-2">
                 {navItems.map((item, index) => {
