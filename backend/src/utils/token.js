@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
 
 /**
- * Generate access token (15 minutes expiry)
+ * Generate access token (1 day expiry)
  * @param {Object} payload - Token payload (userId, role, etc.)
  * @returns {string} - JWT access token
  */
 export const generateAccessToken = (payload) => {
   return jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: '15m', // 15 minutes
+    expiresIn: '1d', // 1 day limit
   });
 };
 
