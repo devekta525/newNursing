@@ -11,11 +11,11 @@ const fadeUp = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50 pt-16 sm:pt-20 lg:pt-18 ">
       <Header />
 
       {/* HERO */}
-      <section className="bg-gradient-to-r mt-18 from-primary/10 to-accent/10 py-20">
+      <section className="bg-gradient-to-r  from-primary/10 to-accent/10 py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}

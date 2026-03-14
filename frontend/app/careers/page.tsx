@@ -131,7 +131,7 @@ export default function CareersPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white pt-18">
+    <main className="min-h-screen bg-white pt-16 sm:pt-20 lg:pt-18 ">
       <Header />
 
       <section className="relative overflow-hidden bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_52%,#38bdf8_100%)] text-white">

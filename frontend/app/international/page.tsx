@@ -43,7 +43,7 @@ export default function InternationalPage() {
   ];
 
   return (
-    <main className="min-h-screen mt-18 bg-white">
+    <main className="min-h-screen pt-16 sm:pt-20 lg:pt-18 bg-white">
       <Header />
 
       {/* Page Header */}

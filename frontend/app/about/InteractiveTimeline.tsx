@@ -26,7 +26,7 @@ const timelineData = [
     year: "2021",
     title: "Emergency-Ready Systems",
     description:
-      "24×7 emergency protocols, escalation ladders, and rapid response systems were introduced.",
+      "24/7 emergency protocols, escalation ladders, and rapid response systems were introduced.",
     image: "/health.jpg",
     tag: "INFRA",
     side: "right",
@@ -103,20 +103,22 @@ export default function InteractiveTimeline() {
   }, []);
 
   return (
-    <section className="relative py-28 bg-transparent">
+    <section className="relative py-16 sm:py-20 lg:py-28 bg-transparent">
       {/* CENTER LINE */}
       <div className="absolute left-1/2 top-0 h-full w-px bg-blue-200 hidden md:block" />
 
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12 sm:mb-16 lg:mb-24">
           Our Journey Through the Years
         </h2>
 
-        <div className="space-y-24">
+        <div className="space-y-10 sm:space-y-14 lg:space-y-24">
           {timelineData.map((item, index) => (
             <TimelineItem
               key={index}
-              ref={(el: any) => (itemsRef.current[index] = el)}
+              ref={(el: HTMLDivElement | null) => {
+                if (el) itemsRef.current[index] = el;
+              }}
               {...item}
             />
           ))}
@@ -142,20 +144,19 @@ const TimelineItem = ({
   return (
     <div
       ref={ref}
-      className={`relative flex flex-col md:flex-row items-center
-        opacity-0 transition-all duration-700 ease-out
-        ${isLeft ? "-translate-x-20" : "translate-x-20"}
-      `}
+      className={`relative flex flex-col md:flex-row items-center opacity-0 transition-all duration-700 ease-out ${
+        isLeft ? "md:-translate-x-20" : "md:translate-x-20"
+      } translate-y-8 md:translate-y-0`}
     >
       {/* DOT */}
-      <div className="absolute md:left-1/2 md:-translate-x-1/2 z-10">
+      <div className="absolute left-4 top-6 md:left-1/2 md:top-auto md:-translate-x-1/2 z-10">
         <div className="w-4 h-4 rounded-full bg-blue-700 border-4 border-white shadow-md" />
       </div>
 
       {/* CARD */}
       <div
         className={`w-full md:w-1/2 ${
-          isLeft ? "md:pr-16 md:text-right" : "md:pl-16 md:ml-auto"
+          isLeft ? "pl-10 md:pl-0 md:pr-16 md:text-right" : "pl-10 md:pl-16 md:ml-auto"
         }`}
       >
         <div
@@ -166,7 +167,7 @@ const TimelineItem = ({
           "
         >
           {/* IMAGE */}
-          <div className="relative h-48 w-full overflow-hidden">
+          <div className="relative h-44 sm:h-48 w-full overflow-hidden">
             <Image
               src={image}
               alt={title}
@@ -187,12 +188,8 @@ const TimelineItem = ({
           {/* CONTENT */}
           <div className="p-5">
             <p className="text-xs text-gray-400 mb-1">{year}</p>
-            <h3 className="font-semibold text-gray-900 mb-1">
-              {title}
-            </h3>
-            <p className="text-sm text-gray-600">
-              {description}
-            </p>
+            <h3 className="font-semibold text-gray-900 mb-1">{title}</h3>
+            <p className="text-sm text-gray-600">{description}</p>
           </div>
         </div>
       </div>

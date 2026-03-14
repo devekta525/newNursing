@@ -50,7 +50,7 @@ export default function BlogPage() {
   }, []);
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(125,211,252,0.22),_transparent_24%),linear-gradient(180deg,#f5fbff_0%,#ffffff_42%,#eff7ff_100%)] pt-24">
+    <main className="min-h-screen overflow-hidden pt-16 sm:pt-20 lg:pt-18  bg-[radial-gradient(circle_at_top,_rgba(125,211,252,0.22),_transparent_24%),linear-gradient(180deg,#f5fbff_0%,#ffffff_42%,#eff7ff_100%)] ">
       <Header />
 
       <section className="relative overflow-hidden text-white">
