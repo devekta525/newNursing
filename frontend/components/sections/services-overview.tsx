@@ -41,7 +41,7 @@ const services = [
     description: 'Critical care monitoring with trained professionals in your own space.',
   },
   {
-    title: 'Doctor At Home',
+    title: 'Doctor On Call',
     icon: Stethoscope,
     image: '/images/services/doctor-at-home.jpg',
     description: 'Scheduled consultations and follow-up treatment without hospital travel.',

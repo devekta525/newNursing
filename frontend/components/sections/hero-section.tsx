@@ -24,7 +24,7 @@ export function HeroSection() {
         animate={reduceMotion ? {} : { scale: 1 }}
         transition={{ duration: 1.1, ease: 'easeOut' }}
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(13, 27, 77, 0.4) 0%, rgba(69, 122, 184, 0.2) 100%), url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=800&fit=crop)',
+          backgroundImage: 'linear-gradient(135deg, rgba(13, 27, 77, 0.4) 0%, rgba(69, 122, 184, 0.2) 100%), url(https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=1600&h=900&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center right',
         }}
@@ -50,21 +50,21 @@ export function HeroSection() {
             </motion.div>
 
             <motion.h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-5 text-balance"
+              className="text-4xl sm:text-4xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 sm:mb-5 text-balance"
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.12 }}
             >
-              Compassionate Hospital-Grade Care at Home
+              Professional Home Nursing & Elder Care Services Across India
             </motion.h1>
 
             <motion.p
-              className="text-gray-100 text-sm sm:text-base lg:text-lg mb-6 max-w-2xl leading-relaxed font-light"
+              className="text-white text-sm sm:text-base lg:text-lg mb-6 max-w-2xl leading-relaxed font-light"
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              From post-operative healing to chronic care management, our certified nurses, physiotherapists, and care coordinators deliver hospital-standard protocols right where you are.
+             Certified Nurses | Verified Caregivers | 24/7 Support | Multi-State Presence
             </motion.p>
 
             {/* Feature Badges */}
@@ -72,7 +72,7 @@ export function HeroSection() {
               {featureBadges.map((badge, index) => (
                 <div
                   key={badge}
-                  className="flex items-center gap-2.5 text-white bg-white/10 backdrop-blur-sm px-3 py-2 rounded-full w-full"
+                  className="flex items-center gap-2.5 text-black bg-white/30 backdrop-blur-sm px-3 py-2 rounded-full w-full"
                 >
                   {index === 0 ? (
                     <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -108,13 +108,13 @@ export function HeroSection() {
 
           {/* Right Callback Form */}
           <div className="hidden lg:block">
-            <CallbackForm />
+            <CallbackForm className="max-w-md p-4 xl:p-5" />
           </div>
         </div>
 
         {/* Mobile Callback Form */}
         <div className="lg:hidden mt-8 sm:mt-10">
-          <CallbackForm />
+          <CallbackForm className="max-w-md p-4" />
         </div>
       </div>
     </section>
