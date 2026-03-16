@@ -1,82 +1,118 @@
+import Link from 'next/link';
 import Header from '@/components/header';
 import { Footer } from '@/components/footer';
-import { Card } from '@/components/ui/card';
-
-const specialities = [
-  {
-    title: 'Cardiac Care',
-    description: 'Specialized care for patients with heart conditions and post-cardiac interventions.',
-    icon: '❤️',
-  },
-  {
-    title: 'Orthopedic Care',
-    description: 'Post-surgical orthopedic care with physiotherapy and mobility assistance.',
-    icon: '🦴',
-  },
-  {
-    title: 'Neurological Care',
-    description: 'Specialized care for stroke, paralysis, and other neurological conditions.',
-    icon: '🧠',
-  },
-  {
-    title: 'Geriatric Care',
-    description: 'Comprehensive elder care with focus on chronic disease management.',
-    icon: '👴',
-  },
-  {
-    title: 'Oncology Support',
-    description: 'Supportive care for cancer patients undergoing treatment.',
-    icon: '🏥',
-  },
-  {
-    title: 'Respiratory Care',
-    description: 'Specialized respiratory support and oxygen therapy services.',
-    icon: '💨',
-  },
-];
-
-export const metadata = {
-  title: 'Our Specialities - Nursing Sarathi',
-  description: 'Explore our specialized healthcare services across various medical conditions.',
-};
+import { CheckCircle, ArrowRight } from 'lucide-react';
+import { specialityPrograms } from '@/lib/speciality-data';
 
 export default function SpecialityPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <Header />
+    <div className="relative overflow-hidden bg-linear-to-br from-muted/30 via-white to-white">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0b28630f_1px,transparent_1px),linear-gradient(to_bottom,#0b28630f_1px,transparent_1px)] bg-[size:26px_26px]" />
 
-      {/* Page Header */}
-      <section className="bg-gradient-to-r mt-18 from-primary/10 to-accent/10 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Our Specialities
-          </h1>
-          <p className="text-gray-600 text-lg max-w-2xl">
-            Expert care across a wide range of medical conditions and specializations.
-          </p>
-        </div>
-      </section>
+      <div className="relative z-10 min-h-screen">
+        <Header />
 
-      {/* Specialities Grid */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {specialities.map((speciality, index) => (
-              <Card key={index} className="p-8 border border-border hover:shadow-lg transition-shadow bg-white">
-                <div className="text-5xl mb-4">{speciality.icon}</div>
-                <h3 className="text-xl font-bold text-foreground mb-3">
-                  {speciality.title}
-                </h3>
-                <p className="text-gray-600">
-                  {speciality.description}
-                </p>
-              </Card>
-            ))}
+        <div className="max-w-7xl mt-18 mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <span className="inline-block text-xs font-semibold text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-4">
+                COMPLETE HOMECARE SPECIALITIES
+              </span>
+
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Speciality care programs built around real home needs
+              </h1>
+
+              <p className="text-gray-600 max-w-xl mb-6">
+                Explore our focused care categories for elderly support, nursing
+                procedures, post-surgery recovery, and advanced clinical care at
+                home. Each program is structured around clear service
+                descriptions so families know exactly what is covered.
+              </p>
+
+              <div className="flex gap-4 flex-wrap">
+                <Stat value="4" label="Core speciality programs" />
+                <Stat value="22+" label="Included care activities" />
+                <Stat value="Home" label="Delivered where recovery happens" />
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-xl p-6 border">
+              <h3 className="font-semibold mb-4">What families can expect</h3>
+
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li className="flex gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 shrink-0" />
+                  Clearly defined services under each speciality category
+                </li>
+                <li className="flex gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 shrink-0" />
+                  Programs designed for both routine and complex home care
+                </li>
+                <li className="flex gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 shrink-0" />
+                  Easy navigation from header dropdown to detailed pages
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-20">
+            <p className="text-xs font-semibold text-gray-500 mb-2">
+              SPECIALITY PROGRAMS
+            </p>
+            <h2 className="text-2xl font-bold mb-8">
+              Choose the care pathway you need
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {specialityPrograms.map((program) => (
+                <div
+                  key={program.slug}
+                  className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-lg transition"
+                >
+                  <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full">
+                    {program.badge}
+                  </span>
+
+                  <h3 className="font-semibold mt-4 mb-2">{program.title}</h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    {program.shortDescription}
+                  </p>
+
+                  <div className="space-y-2 mb-5">
+                    {program.services.map((service) => (
+                      <div key={service} className="flex gap-2 text-sm text-gray-600">
+                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                        <span>{service}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link
+                    href={`/speciality/${program.slug}`}
+                    className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:underline"
+                  >
+                    View full page
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </section>
 
-      <Footer />
-    </main>
+        <Footer />
+      </div>
+    </div>
+  );
+}
+
+function Stat({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="bg-white border rounded-xl px-4 py-3 shadow-sm">
+      <p className="text-lg font-bold">{value}</p>
+      <p className="text-xs text-gray-500">{label}</p>
+    </div>
   );
 }

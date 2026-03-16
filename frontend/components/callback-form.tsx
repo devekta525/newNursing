@@ -37,6 +37,7 @@ export function CallbackForm({
   const [formData, setFormData] = useState({
     ...initialFormData,
   });
+  const [hasConsent, setHasConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [submitSuccess, setSubmitSuccess] = useState('');
@@ -73,12 +74,18 @@ export function CallbackForm({
       return;
     }
 
+    if (!hasConsent) {
+      setSubmitError('Please confirm consent to the Privacy Policy before submitting.');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       const response = await createEnquiry(payload);
       setSubmitSuccess(response.message || 'Enquiry submitted successfully.');
       setFormData({ ...initialFormData });
+      setHasConsent(false);
     } catch (error) {
       setSubmitError(
         error instanceof Error ? error.message : 'Unable to submit enquiry.'
@@ -225,6 +232,26 @@ export function CallbackForm({
         placeholder="Patient condition"
         className="rounded-lg bg-muted min-h-[70px]"
       />
+    </div>
+
+    <div className="md:col-span-2">
+      <label className="flex items-start gap-3 rounded-xl border border-border/60 bg-muted/40 px-3 py-3 text-sm text-gray-700">
+        <input
+          type="checkbox"
+          checked={hasConsent}
+          onChange={(event) => setHasConsent(event.target.checked)}
+          className="mt-1 h-4 w-4 rounded border-gray-300 text-primary"
+          required
+        />
+        <span className="leading-6">
+          I consent to Nursing Sarathi collecting and using the information shared in this enquiry
+          according to the{' '}
+          <a href="/privacy-policy" className="font-semibold text-primary underline underline-offset-2">
+            Privacy Policy
+          </a>
+          .
+        </span>
+      </label>
     </div>
 
     {/* BUTTON */}

@@ -23,9 +23,7 @@ import {
   Info,
   Contact,
   HeartPulse,
-  Brain,
   Activity,
-  Bone,
   Droplet,
   User,
   LogOut,
@@ -33,8 +31,18 @@ import {
 
 import { Button } from './ui/button';
 import { useAuth } from '@/components/auth/auth-provider';
+import { specialityPrograms } from '@/lib/speciality-data';
+
+const specialityIcons = [Users, HeartPulse, Activity, ShieldCheck];
 
 /* ================= NAV ITEMS ================= */
+
+const specialityItems = specialityPrograms.map((program, index) => ({
+  icon: specialityIcons[index] ?? ClipboardList,
+  label: program.title,
+  description: program.shortDescription,
+  href: `/speciality/${program.slug}`,
+}));
 
 const navItems = [
   { type: 'link', icon: Home, label: 'Home', href: '/' },
@@ -58,13 +66,8 @@ const navItems = [
     label: 'Speciality',
     icon: ShieldCheck,
     items: [
-      { icon: HeartPulse, label: "Cardiac Care", href: "/cardiac-care" },
-      { icon: Activity, label: "Cancer Care", href: "/cancer-care" },
-      { icon: Brain, label: "Neurosciences", href: "/neurosciences" },
-      { icon: Activity, label: "Gastro Sciences", href: "/gastrosciences" },
-      { icon: Bone, label: "Orthopaedics", href: "/orthopaedics" },
-      { icon: Droplet, label: "Renal Care", href: "/renal-care" },
-      { icon: ClipboardList, label: "View All Specialities", href: "/all-specialities" },
+      ...specialityItems,
+      { icon: ClipboardList, label: "View All Specialities", href: "/speciality" },
     ]
   },
 
@@ -281,10 +284,17 @@ export default function Header() {
                                     setOpen(false);
                                     setActive(null);
                                   }}
-                                  className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-primary"
+                                  className="flex items-start gap-3 rounded-xl px-3 py-3 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-primary"
                                 >
-                                  <subItem.icon className="h-4 w-4" />
-                                  <span>{subItem.label}</span>
+                                  <subItem.icon className="mt-0.5 h-4 w-4 shrink-0" />
+                                  <div className="min-w-0">
+                                    <div className="font-medium text-slate-700">{subItem.label}</div>
+                                    {subItem.description && (
+                                      <p className="mt-1 text-xs leading-5 text-slate-500">
+                                        {subItem.description}
+                                      </p>
+                                    )}
+                                  </div>
                                 </Link>
                               ))}
                             </div>
@@ -376,7 +386,7 @@ return (
 
 </button>
 
-<div className="absolute top-full left-0 w-72 bg-white shadow-xl rounded-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+<div className="absolute top-full left-0 w-[26rem] bg-white shadow-xl rounded-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
 
 <div className="p-2 grid gap-1">
 
@@ -385,16 +395,26 @@ return (
 <Link
 key={idx}
 href={item.href}
-className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 text-sm"
+className="flex items-start gap-3 px-3 py-3 rounded-lg hover:bg-gray-50 text-sm"
 >
 
-<div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
 
 <item.icon className="w-4 h-4 text-primary" />
 
 </div>
 
-<span>{item.label}</span>
+<div className="min-w-0">
+
+<div className="font-medium text-gray-900">{item.label}</div>
+
+{item.description ? (
+
+<p className="mt-1 text-xs leading-5 text-gray-500">{item.description}</p>
+
+) : null}
+
+</div>
 
 </Link>
 
