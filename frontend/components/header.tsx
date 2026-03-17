@@ -100,18 +100,18 @@ const navItems = [
     ]
   },
 
-  {
-    type: 'dropdown',
-    label: 'International Patients',
-    icon: Globe,
-    items: [
-      { icon: Globe, label: "International Patients", href: "/international-patients" },
-      { icon: HelpCircle, label: "Patient Help Desk", href: "/help-desk" },
-      { icon: MapPin, label: "Plan Your Trip", href: "/plan-your-trip" },
-      { icon: ClipboardList, label: "Request An Estimate", href: "/request-an-estimate" },
-      { icon: ShieldCheck, label: "Insurance Partner Network", href: "/insurance-partner-network" },
-    ]
-  },
+  // {
+  //   type: 'dropdown',
+  //   label: 'International Patients',
+  //   icon: Globe,
+  //   items: [
+  //     { icon: Globe, label: "International Patients", href: "/international-patients" },
+  //     { icon: HelpCircle, label: "Patient Help Desk", href: "/help-desk" },
+  //     { icon: MapPin, label: "Plan Your Trip", href: "/plan-your-trip" },
+  //     { icon: ClipboardList, label: "Request An Estimate", href: "/request-an-estimate" },
+  //     { icon: ShieldCheck, label: "Insurance Partner Network", href: "/insurance-partner-network" },
+  //   ]
+  // },
 
   { type: 'link', icon: Contact, label: 'Contact', href: '/contact' },
 ];

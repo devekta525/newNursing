@@ -100,16 +100,19 @@ export default function ContactPage() {
       </section>
 
       <section className="py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           <Card className="p-6 hover:-translate-y-1 transition-transform duration-300">
             <p className="text-xs font-semibold text-gray-500 mb-1">VISIT US</p>
             <p className="font-bold">Nursingsarathi HQ</p>
             <p className="text-sm text-gray-600">Noida Office, E-23 Sector-3, Noida</p>
-            <p className="text-xs font-semibold text-gray-500 mt-3 mb-1">
-              Mohali / Chandigarh Office
-            </p>
+            <p className="text-sm mt-4">{contactDetails.email}</p>
+          </Card>
+
+          <Card className="p-6 hover:-translate-y-1 transition-transform duration-300">
+            <p className="text-xs font-semibold text-gray-500 mb-1">VISIT US</p>
+            <p className="font-bold">Mohali / Chandigarh Office</p>
             <p className="text-sm text-gray-600">GM Plaza, 3rd Floor, Sector 77, Mohali</p>
-            <p className="text-sm mt-2">{contactDetails.email}</p>
+            <p className="text-sm mt-4">{contactDetails.email}</p>
           </Card>
 
           <Card className="p-6 bg-blue-50 hover:-translate-y-1 transition-transform duration-300">

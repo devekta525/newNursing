@@ -4,7 +4,7 @@ import Image from "next/image";
 import Header from "@/components/header";
 import { Footer } from "@/components/footer";
 import InteractiveTimeline from "@/app/about/InteractiveTimeline";
-import { Phone, ShieldCheck, Clock, Stethoscope } from "lucide-react";
+import { Phone, ShieldCheck, Clock, Stethoscope, Users, MapPin } from "lucide-react";
 
 export default function AboutPage() {
   return (
@@ -21,34 +21,34 @@ export default function AboutPage() {
             {/* LEFT CONTENT */}
             <div>
               <span className="inline-block text-[11px] sm:text-xs font-semibold text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-4 sm:mb-5">
-                AVAILABLE IN 15+ STATES
+                WHO WE ARE
               </span>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-4 sm:mb-5">
-                Hospital-Grade Care,
-                <br /> Right at Your Home
+                About Nursing Sarathi
               </h1>
 
+              <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-xl mb-4">
+                Nursing Sarathi provides professional home healthcare services for patients who need medical care, recovery support, or daily assistance at home.
+              </p>
+
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-xl">
-                Our certified nurses deliver comprehensive medical support,
-                bridging trusted hospital protocols with the comfort of your
-                living room. One call connects you to specialists,
-                diagnostics, and compassion-driven service.
+                Our trained nurses, caregivers, and physiotherapists deliver hospital-quality care in the comfort of the patient&apos;s home. From elderly care and post-surgery recovery to ICU-level support, our team ensures safe, reliable, and compassionate care for every patient.
               </p>
 
               {/* FEATURES */}
               <ul className="mt-5 sm:mt-6 space-y-3 text-sm sm:text-base text-gray-700">
                 <li className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-blue-700" />
-                  Government-certified nurses
+                  Home Nursing and Patient Attendant Care
                 </li>
                 <li className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-blue-700" />
-                  24/7 emergency-ready support
+                  ICU Setup at Home and 24/7 Care Support
                 </li>
                 <li className="flex items-center gap-2">
                   <Stethoscope className="w-4 h-4 text-blue-700" />
-                  Hospital-grade infection control
+                  Physiotherapy, Post-Hospital Recovery, and Elderly Care Support
                 </li>
               </ul>
 
@@ -60,15 +60,16 @@ export default function AboutPage() {
 
                 <button className="inline-flex w-full sm:w-auto items-center justify-center gap-2 border border-gray-300 px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-50 transition">
                   <Phone className="w-4 h-4" />
-                  Talk to Expert
+                  Talk to Care Advisor
                 </button>
               </div>
 
               {/* STATS */}
-              <div className="grid grid-cols-1 min-[420px]:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12 max-w-lg">
-                <Stat label="Certified Nurses" value="500+" />
-                <Stat label="Families Served" value="10K+" />
-                <Stat label="Emergency Care" value="24/7" />
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-12 max-w-xl">
+                <Stat label="Patients Served" value="10,000+" icon={Users} />
+                <Stat label="Verified Caregivers" value="500+" icon={ShieldCheck} />
+                <Stat label="Cities Covered" value="15+" icon={MapPin} />
+                <Stat label="Care Support" value="24/7" icon={Clock} />
               </div>
             </div>
 
@@ -87,15 +88,15 @@ export default function AboutPage() {
 
               {/* FLOATING BADGES */}
               <div className="absolute top-3 right-3 sm:top-6 sm:-right-4 bg-white rounded-xl shadow px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold max-w-[150px] sm:max-w-none">
-                <span>98.5%</span>
+                <span>10,000+</span>
                 <p className="text-xs text-gray-500 font-normal">
-                  Patient satisfaction
+                  Patients served
                 </p>
               </div>
 
               <div className="absolute bottom-3 left-3 sm:bottom-6 sm:-left-4 bg-blue-700 text-white rounded-xl shadow px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm max-w-[180px] sm:max-w-none">
-                <p className="font-semibold">24/7 Emergency Care</p>
-                <p className="text-xs opacity-90">Call +91-8766382620</p>
+                <p className="font-semibold">24/7 Care Support</p>
+                <p className="text-xs opacity-90">Talk to Care Advisor</p>
               </div>
             </div>
           </div>
@@ -120,9 +121,10 @@ export default function AboutPage() {
 
 /* ---------- COMPONENT ---------- */
 
-function Stat({ label, value }: any) {
+function Stat({ label, value, icon: Icon }: any) {
   return (
     <div className="rounded-2xl bg-white/80 px-4 py-4 text-center shadow-sm sm:bg-transparent sm:px-0 sm:py-0 sm:text-left sm:shadow-none">
+      {Icon ? <Icon className="mx-auto mb-2 h-4 w-4 text-blue-700 sm:mx-0" /> : null}
       <p className="text-2xl font-bold text-gray-900">{value}</p>
       <p className="text-xs text-gray-500">{label}</p>
     </div>

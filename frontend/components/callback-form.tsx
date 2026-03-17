@@ -2,10 +2,10 @@
 
 import React from "react";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
 import { createEnquiry } from '@/lib/enquiries/api';
 import { cn } from '@/lib/utils';
 
@@ -21,26 +21,41 @@ type CallbackFormProps = {
 const initialFormData = {
   name: '',
   phone: '',
-  state: '',
   city: '',
   serviceRequired: '',
-  whenRequired: '',
-  patientCondition: '',
+};
+
+const demoBackendValues = {
+  state: 'Demo State',
+  whenRequired: 'As soon as possible',
+  patientCondition: 'Submitted from simplified consultation form.',
 };
 
 export function CallbackForm({
   eyebrow = 'Request a Callback',
-  title = 'Homecare Assistance',
+  title = 'Request a Home Care Consultation',
   buttonLabel = 'Submit',
   className = '',
 }: CallbackFormProps) {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     ...initialFormData,
   });
-  const [hasConsent, setHasConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [submitSuccess, setSubmitSuccess] = useState('');
+
+  useEffect(() => {
+    const selectedService = searchParams.get('service')?.trim();
+
+    if (!selectedService) return;
+
+    setFormData((prev) => (
+      prev.serviceRequired === selectedService
+        ? prev
+        : { ...prev, serviceRequired: selectedService }
+    ));
+  }, [searchParams]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -57,11 +72,11 @@ export function CallbackForm({
     const payload = {
       name: formData.name.trim(),
       phone: formData.phone.trim(),
-      state: formData.state.trim(),
+      state: demoBackendValues.state,
       city: formData.city.trim(),
       serviceRequired: formData.serviceRequired.trim(),
-      whenRequired: formData.whenRequired.trim(),
-      patientCondition: formData.patientCondition.trim() || undefined,
+      whenRequired: demoBackendValues.whenRequired,
+      patientCondition: demoBackendValues.patientCondition,
     };
 
     if (!payload.name || payload.name.length < 2) {
@@ -74,18 +89,12 @@ export function CallbackForm({
       return;
     }
 
-    if (!hasConsent) {
-      setSubmitError('Please confirm consent to the Privacy Policy before submitting.');
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
       const response = await createEnquiry(payload);
       setSubmitSuccess(response.message || 'Enquiry submitted successfully.');
       setFormData({ ...initialFormData });
-      setHasConsent(false);
     } catch (error) {
       setSubmitError(
         error instanceof Error ? error.message : 'Unable to submit enquiry.'
@@ -105,7 +114,7 @@ export function CallbackForm({
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.5 }}
   className={cn(
-    'bg-white rounded-3xl shadow-xl p-5 border border-border/10 max-w-xl w-full mx-auto',
+    'w-full max-w-md rounded-[24px] border border-border/10 bg-white p-4 shadow-xl sm:p-5',
     className
   )}
 >
@@ -113,11 +122,11 @@ export function CallbackForm({
     {eyebrow}
   </div>
 
-  <h3 className="text-2xl font-bold text-foreground mb-4">
+  <h3 className="mb-3 text-xl font-bold text-foreground sm:text-2xl">
     {title}
   </h3>
 
-  <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-3">
+  <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-3">
 
     {/* NAME */}
     <div>
@@ -156,22 +165,6 @@ export function CallbackForm({
       />
     </div>
 
-    {/* STATE */}
-    <div>
-      <label className="text-sm font-semibold">
-        State *
-      </label>
-      <Input
-        type="text"
-        name="state"
-        value={formData.state}
-        onChange={handleChange}
-        placeholder="State"
-        className="rounded-lg bg-muted"
-        required
-      />
-    </div>
-
     {/* CITY */}
     <div>
       <label className="text-sm font-semibold">
@@ -189,7 +182,7 @@ export function CallbackForm({
     </div>
 
     {/* SERVICE */}
-    <div className="md:col-span-2">
+    <div>
       <label className="text-sm font-semibold">
         Service Required *
       </label>
@@ -204,58 +197,8 @@ export function CallbackForm({
       />
     </div>
 
-    {/* WHEN REQUIRED */}
-    <div className="md:col-span-2">
-      <label className="text-sm font-semibold">
-        When Required *
-      </label>
-      <Input
-        type="text"
-        name="whenRequired"
-        value={formData.whenRequired}
-        onChange={handleChange}
-        placeholder="When service required"
-        className="rounded-lg bg-muted"
-        required
-      />
-    </div>
-
-    {/* CONDITION */}
-    <div className="md:col-span-2">
-      <label className="text-sm font-semibold">
-        Patient Condition
-      </label>
-      <Textarea
-        name="patientCondition"
-        value={formData.patientCondition}
-        onChange={handleChange}
-        placeholder="Patient condition"
-        className="rounded-lg bg-muted min-h-[70px]"
-      />
-    </div>
-
-    <div className="md:col-span-2">
-      <label className="flex items-start gap-3 rounded-xl border border-border/60 bg-muted/40 px-3 py-3 text-sm text-gray-700">
-        <input
-          type="checkbox"
-          checked={hasConsent}
-          onChange={(event) => setHasConsent(event.target.checked)}
-          className="mt-1 h-4 w-4 rounded border-gray-300 text-primary"
-          required
-        />
-        <span className="leading-6">
-          I consent to Nursing Sarathi collecting and using the information shared in this enquiry
-          according to the{' '}
-          <a href="/privacy-policy" className="font-semibold text-primary underline underline-offset-2">
-            Privacy Policy
-          </a>
-          .
-        </span>
-      </label>
-    </div>
-
     {/* BUTTON */}
-    <div className="md:col-span-2">
+    <div>
       {submitError && (
         <p className="mb-3 text-sm text-red-600">{submitError}</p>
       )}
@@ -265,7 +208,7 @@ export function CallbackForm({
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 rounded-full"
+        className="w-full rounded-full bg-primary py-2.5 font-semibold text-white hover:bg-primary/90"
       >
         {isSubmitting ? 'Submitting...' : buttonLabel}
       </Button>

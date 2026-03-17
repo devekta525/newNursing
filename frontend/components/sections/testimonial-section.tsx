@@ -4,8 +4,6 @@ import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 
-/* ================= DATA ================= */
-
 const testimonials = [
   {
     image:
@@ -33,8 +31,6 @@ const testimonials = [
   },
 ];
 
-/* ================= COMPONENT ================= */
-
 export function TestimonialSection() {
   const [index, setIndex] = useState(0);
 
@@ -45,60 +41,64 @@ export function TestimonialSection() {
 
   return (
     <section className="py-14 sm:py-16 md:py-24">
-      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 md:gap-16 lg:gap-20 items-center">
-
-        {/* LEFT – STACKED IMAGES */}
-        <ScrollReveal className="relative w-full max-w-[320px] h-[340px] sm:h-[380px] mx-auto md:mx-0">
-          {testimonials.map((t, i) => {
-            const offset = (i - index + testimonials.length) % testimonials.length;
-
-            if (offset > 2) return null;
-
-            return (
-              <img
-                key={i}
-                src={t.image}
-                alt={t.name}
-                className="absolute w-full h-full object-cover rounded-2xl shadow-xl transition-all duration-500"
-                style={{
-                  transform: `translate(${offset * 20}px, ${-offset * 20}px)`,
-                  zIndex: 10 - offset,
-                  opacity: offset === 0 ? 1 : 0.6,
-                }}
-              />
-            );
-          })}
+      <div className="max-w-6xl mx-auto px-4">
+        <ScrollReveal className="mb-10 text-center md:mb-14">
+          <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl md:text-4xl">
+            What Families Say About Our Care
+          </h2>
         </ScrollReveal>
 
-        {/* RIGHT – CONTENT */}
-        <ScrollReveal delay={0.08} className="text-center md:text-left">
-          <h3 className="text-xl sm:text-2xl font-bold mb-1">
-            {testimonials[index].name}
-          </h3>
-          <p className="text-sm text-muted-foreground mb-6">
-            {testimonials[index].role}
-          </p>
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16 lg:gap-20">
+          <ScrollReveal className="relative mx-auto h-[340px] w-full max-w-[320px] sm:h-[380px] md:mx-0">
+            {testimonials.map((t, i) => {
+              const offset = (i - index + testimonials.length) % testimonials.length;
 
-          <p className="text-base sm:text-lg leading-relaxed mb-8 sm:mb-10">
-            {testimonials[index].text}
-          </p>
+              if (offset > 2) return null;
 
-          {/* ARROWS */}
-          <div className="flex gap-4 justify-center md:justify-start">
-            <button
-              onClick={prev}
-              className="h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
-            >
-              <ChevronLeft />
-            </button>
-            <button
-              onClick={next}
-              className="h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
-            >
-              <ChevronRight />
-            </button>
-          </div>
-        </ScrollReveal>
+              return (
+                <img
+                  key={i}
+                  src={t.image}
+                  alt={t.name}
+                  className="absolute h-full w-full rounded-2xl object-cover shadow-xl transition-all duration-500"
+                  style={{
+                    transform: `translate(${offset * 20}px, ${-offset * 20}px)`,
+                    zIndex: 10 - offset,
+                    opacity: offset === 0 ? 1 : 0.6,
+                  }}
+                />
+              );
+            })}
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.08} className="text-center md:text-left">
+            <h3 className="mb-1 text-xl font-bold sm:text-2xl">
+              {testimonials[index].name}
+            </h3>
+            <p className="mb-6 text-sm text-muted-foreground">
+              {testimonials[index].role}
+            </p>
+
+            <p className="mb-8 text-base leading-relaxed sm:mb-10 sm:text-lg">
+              {testimonials[index].text}
+            </p>
+
+            <div className="flex justify-center gap-4 md:justify-start">
+              <button
+                onClick={prev}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white transition-transform hover:scale-105 active:scale-95"
+              >
+                <ChevronLeft />
+              </button>
+              <button
+                onClick={next}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white transition-transform hover:scale-105 active:scale-95"
+              >
+                <ChevronRight />
+              </button>
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   );
