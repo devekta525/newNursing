@@ -146,7 +146,7 @@ export function ServicesOverview() {
                           </button>
 
                           <a
-                            href="tel:+918766382620"
+                            href="tel:+919560505355"
                             className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-[#0B2C6A] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#081f4b]"
                           >
                             <Phone className="h-4 w-4" />

@@ -7,7 +7,7 @@ import { AnimatedButton } from '@/components/animations/animated-button';
 
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
-  const emergencyPhone = '+918766382620';
+  const emergencyPhone = '+919560505355';
   const whatsappMessage = encodeURIComponent(
     'Hello Nursing Sarathi, I would like to know more about your home care services.'
   );

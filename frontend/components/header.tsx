@@ -25,6 +25,9 @@ import {
   HeartPulse,
   Activity,
   Droplet,
+  Droplets,
+  Syringe,
+  Bandage,
   User,
   LogOut,
 } from 'lucide-react';
@@ -52,11 +55,11 @@ const navItems = [
     label: 'Services',
     icon: BriefcaseMedical,
     items: [
-      { icon: Stethoscope, label: "Injection Administration", href: "/injection" },
-      { icon: Droplet, label: "IV Cannulation", href: "/iv-cannulation" },
-      { icon: Activity, label: "Wound Dressing", href: "/wound-dressing" },
-      { icon: Activity, label: "Catheterization", href: "/catheterization" },
-      { icon: Activity, label: "Nasogastric Intubation", href: "/nasogastric-intubation" },
+      { icon: Syringe, label: "IV Injection at Home", description: "Safe injection service by verified nurses at your doorstep", href: "/injection" },
+      { icon: Droplets, label: "IV Drip at Home", description: "Professional IV cannulation and drip administration at home", href: "/iv-cannulation" },
+      { icon: Bandage, label: "Wound Care at Home", description: "Expert wound dressing and healing care by certified nurses", href: "/wound-dressing" },
+      { icon: Droplet, label: "Catheter Care at Home", description: "Safe, hygienic and private catheter care by trained nurses", href: "/catheterization" },
+      { icon: Activity, label: "Feeding Tube Support at Home", description: "Safe NG tube placement and feeding care at home", href: "/nasogastric-intubation" },
       { icon: ClipboardList, label: "All Services", href: "/all-services" },
     ]
   },

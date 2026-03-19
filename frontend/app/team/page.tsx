@@ -118,7 +118,7 @@ export default function TeamPage() {
 
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-blue-700 text-white rounded-xl px-4 py-2 text-xs flex items-center gap-1">
                   <Phone className="w-3 h-3" />
-                  Emergency Desk · +91-8766382620
+                  Emergency Desk · +91-9560505355
                 </div>
               </div>
             </div>

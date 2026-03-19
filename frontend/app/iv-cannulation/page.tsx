@@ -4,11 +4,11 @@ import Image from "next/image";
 import Header from "@/components/header";
 import { Footer } from "@/components/footer";
 import { useState } from "react";
-import { CheckCircle, Phone, ChevronDown } from "lucide-react";
+import { CheckCircle, Phone, ChevronDown, MessageCircle } from "lucide-react";
 
 export default function IVCannulationPage() {
   return (
-    <div className="relative pt-16 sm:pt-20 lg:pt-18  overflow-hidden bg-linear-to-br from-muted/30 via-white to-white">
+    <div className="relative pt-16 sm:pt-20 lg:pt-18 overflow-hidden bg-linear-to-br from-muted/30 via-white to-white">
 
       {/* GRID BACKGROUND */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0b28630f_1px,transparent_1px),linear-gradient(to_bottom,#0b28630f_1px,transparent_1px)] bg-[size:26px_26px]" />
@@ -20,7 +20,7 @@ export default function IVCannulationPage() {
         <div className="max-w-6xl mx-auto px-4 py-10">
           {/* BREADCRUMB */}
           <p className="text-sm text-gray-500 mb-4">
-            Services / <span className="text-gray-700">IV Cannulation</span>
+            Services / <span className="text-gray-700">IV Drip at Home</span>
           </p>
 
           {/* MAIN CARD */}
@@ -30,176 +30,244 @@ export default function IVCannulationPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <div>
                 <span className="inline-block text-xs font-semibold text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-4">
-                  ULTRASOUND ASSISTED
+                  SAME-DAY VISIT AVAILABLE
                 </span>
 
                 <h1 className="text-3xl font-bold text-gray-900 mb-3">
-                  IV Cannulation
+                  IV Drip at Home
                 </h1>
 
                 <p className="font-semibold text-gray-700 mb-3">
-                  Precision access for hydration & therapy
+                  Safe and comfortable IV fluid therapy at home by experienced nurses.
                 </p>
 
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  From difficult venous access to long-dwell cannulas, our
-                  advanced-trained nurses use ultrasound-guided mapping and
-                  hypoallergenic dressings.
-                </p>
+                <ul className="space-y-1 text-sm text-gray-600 mb-4">
+                  <li className="flex gap-2"><CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" /> Same-day visit available</li>
+                  <li className="flex gap-2"><CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" /> Pain-free vein access</li>
+                  <li className="flex gap-2"><CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" /> Hospital-grade hygiene</li>
+                </ul>
 
-                <p className="text-gray-600 text-sm mt-3">
-                  Recommended for antibiotic therapy, hydration, chemo support,
-                  or when you want hospital-grade asepsis at home.
-                </p>
+                <div className="flex flex-wrap gap-3">
+                  <button className="inline-flex items-center gap-2 bg-blue-700 text-white px-5 py-2 rounded-full hover:bg-blue-800 transition text-sm font-medium">
+                    <Phone className="w-4 h-4" />
+                    Book Nurse Now
+                  </button>
+                  <a
+                    href="tel:+919560505355"
+                    className="inline-flex items-center gap-2 border border-blue-700 text-blue-700 px-5 py-2 rounded-full hover:bg-blue-50 transition text-sm font-medium"
+                  >
+                    Call Now
+                  </a>
+                </div>
               </div>
 
               {/* IMAGE */}
               <div className="bg-gray-100 rounded-2xl p-4">
                 <div className="relative h-64 w-full rounded-xl overflow-hidden">
                   <Image
-                    src="/injection_img.png"
-                    alt="IV Cannulation setup"
+                    src="/iv_drop.png"
+                    alt="IV Drip at Home"
                     fill
                     className="object-cover"
                   />
                 </div>
-                
               </div>
             </div>
 
-            {/* STATS */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-              <StatCard title="SUCCESSFUL FIRST ATTEMPTS" value="93%" />
-              <StatCard title="MAX DWELL TIME" value="72 hrs" />
-              <StatCard title="EMERGENCY READINESS" value="<45 min" />
+            {/* TRUST BAR */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+              <StatCard title="CARE PLANS DELIVERED" value="35,000+" />
+              <StatCard title="FIRST ATTEMPT SUCCESS" value="93%" />
+              <StatCard title="VERIFIED NURSES" value="Trained" />
+              <StatCard title="SUPPORT" value="24×7" />
             </div>
 
-            {/* INSIDE SETUP */}
-            <div className="mt-12">
-              <p className="text-xs font-semibold text-gray-500 mb-2">
-                INSIDE THE SETUP
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="h-40 bg-gray-100 rounded-xl flex items-center justify-center text-sm text-gray-400">
-                  IV Cannulation
-                </div>
-                <div className="h-40 bg-gray-100 rounded-xl flex items-center justify-center text-sm text-gray-400">
-                  IV Cannulation
-                </div>
-              </div>
-              <p className="text-xs text-gray-400 mt-2">
-                Dummy images – replace with real shots later.
-              </p>
-            </div>
-
-            {/* FEATURES */}
-            <div className="mt-12">
-              <p className="text-xs font-semibold text-gray-500 mb-2">
-                KEY FEATURES
-              </p>
-              <h2 className="text-xl font-bold mb-6">
-                What makes this service special
+            {/* SHORT DESCRIPTION */}
+            <div className="mt-12 p-6 bg-blue-50 rounded-2xl">
+              <h2 className="text-lg font-bold text-gray-900 mb-3">
+                Need IV drip at home?
               </h2>
+              <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                Nursing Sarathi provides professional IV cannulation and drip administration at home,
+                ensuring safe hydration and medication delivery without hospital visits.
+              </p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Our nurses are trained in handling difficult veins and follow strict hygiene protocols
+                for safe and effective treatment.
+              </p>
+            </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <FeatureCard
-                  number="1"
-                  title="Vein preservation strategy"
-                  desc="We rotate access sites and use low-profile cannulas to reduce thrombophlebitis risk."
-                />
-                <FeatureCard
-                  number="2"
-                  title="Infusion monitoring"
-                  desc="Real-time drip calculations, infiltration alerts, and vitals logging built into every visit."
-                />
-                <FeatureCard
-                  number="3"
-                  title="Family education"
-                  desc="Caregivers are taught early warning signs and dressing integrity maintenance."
-                />
+            {/* WHO IS THIS FOR */}
+            <div className="mt-12">
+              <p className="text-xs font-semibold text-gray-500 mb-2">WHO IS THIS FOR</p>
+              <h2 className="text-xl font-bold mb-4">This service is ideal for:</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {[
+                  "Patients needing hydration therapy",
+                  "Weakness, dehydration, or recovery support",
+                  "Post-surgery or illness recovery",
+                  "Patients requiring IV medications",
+                  "Elderly patients needing home care",
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-2 text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                    {item}
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* EXPECTATION + CTA */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+            {/* WHAT TO EXPECT */}
+            <div className="mt-12">
+              <p className="text-xs font-semibold text-gray-500 mb-2">WHAT TO EXPECT</p>
+              <h2 className="text-xl font-bold mb-4">What happens during the visit?</h2>
               <div className="border rounded-xl p-6">
-                <h3 className="font-semibold mb-4">What to expect</h3>
                 <ul className="space-y-3 text-sm text-gray-600">
-                  <li className="flex gap-2">
-                    <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5" />
-                    Pre-procedure hydration assessment
-                  </li>
-                  <li className="flex gap-2">
-                    <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5" />
-                    Dermatome cleansing with CHG swabs
-                  </li>
-                  <li className="flex gap-2">
-                    <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5" />
-                    Securement with breathable lattice tapes
-                  </li>
+                  {[
+                    "Nurse visits your home on time",
+                    "Assesses vein condition and patient health",
+                    "Safely inserts IV cannula",
+                    "Starts drip and monitors flow",
+                    "Ensures patient comfort throughout",
+                    "Shares visit details after completion",
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-2">
+                      <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
                 </ul>
-              </div>
-
-              <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
-                <h3 className="font-semibold mb-2">
-                  Need coordinated pharmacy delivery?
-                </h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  We can source compatible fluids, tubing sets, and infusion pumps 24×7.
-                </p>
-                <button className="inline-flex items-center gap-2 bg-blue-700 text-white px-5 py-2 rounded-full hover:bg-blue-800 transition">
-                  <Phone className="w-4 h-4" />
-                  Arrange IV support
-                </button>
               </div>
             </div>
 
-            {/* WHO + PAIRS */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 text-sm text-gray-600">
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-2">
-                  Who is this best suited for?
-                </h3>
-                <ul className="list-disc pl-5 space-y-2">
-                  <li>Families wanting structured IV care without hospital visits</li>
-                  <li>Patients needing predictable schedules and escalation pathways</li>
-                  <li>Doctors extending in-hospital protocols to home care</li>
-                </ul>
+            {/* TYPES */}
+            <div className="mt-12">
+              <p className="text-xs font-semibold text-gray-500 mb-2">TYPES WE PROVIDE</p>
+              <h2 className="text-xl font-bold mb-4">We provide:</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[
+                  { n: "1", title: "IV Fluid Administration", desc: "Saline and glucose IV fluid administration at home." },
+                  { n: "2", title: "IV Antibiotic & Vitamin Infusion", desc: "IV antibiotic support and vitamin infusion as prescribed." },
+                  { n: "3", title: "Hydration & Long-Duration IV", desc: "Hydration therapy and long-duration IV support." },
+                ].map((item) => (
+                  <FeatureCard key={item.n} number={item.n} title={item.title} desc={item.desc} />
+                ))}
               </div>
+            </div>
 
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-2">
-                  Pairs well with
-                </h3>
-                <p>
-                  Injection administration, wound dressing, speciality care
-                  programs, and 24×7 monitoring bundles for a fully choreographed
-                  care plan.
-                </p>
+            {/* WHY CHOOSE US */}
+            <div className="mt-12">
+              <p className="text-xs font-semibold text-gray-500 mb-2">WHY CHOOSE NURSING SARATHI</p>
+              <h2 className="text-xl font-bold mb-4">Why families trust us:</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {[
+                  "Skilled nurses for difficult vein access",
+                  "High first-attempt success rate",
+                  "Strict sterile protocols",
+                  "Comfortable home-based care",
+                  "Fast response and support",
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-2 text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* HOW IT WORKS */}
+            <div className="mt-12">
+              <p className="text-xs font-semibold text-gray-500 mb-2">HOW IT WORKS</p>
+              <h2 className="text-xl font-bold mb-4">Simple 4-step process:</h2>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {[
+                  { n: "1", text: "Book your IV service" },
+                  { n: "2", text: "Nurse is assigned" },
+                  { n: "3", text: "Home visit at scheduled time" },
+                  { n: "4", text: "IV drip administered safely" },
+                ].map((step) => (
+                  <div key={step.n} className="border rounded-xl p-4 text-center">
+                    <div className="w-8 h-8 bg-blue-700 text-white rounded-full flex items-center justify-center font-bold mx-auto mb-3">
+                      {step.n}
+                    </div>
+                    <p className="text-sm text-gray-600">{step.text}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm text-gray-500 mt-3 text-center">Quick, safe, and hassle-free.</p>
+            </div>
+
+            {/* CTA BLOCK */}
+            <div className="mt-12 bg-blue-700 rounded-2xl p-8 text-center text-white">
+              <h2 className="text-xl font-bold mb-2">Need IV drip at home today?</h2>
+              <p className="text-blue-100 mb-6">Avoid hospital visits and get expert care at home.</p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <button className="inline-flex items-center gap-2 bg-white text-blue-700 px-6 py-2.5 rounded-full hover:bg-blue-50 transition font-semibold text-sm">
+                  <Phone className="w-4 h-4" />
+                  Book Nurse Now
+                </button>
+                <a
+                  href="https://wa.me/919560505355?text=Hi%2C%20I%20need%20IV%20drip%20service%20at%20home.%20Please%20assist."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-2.5 rounded-full hover:bg-green-600 transition font-semibold text-sm"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp Now
+                </a>
+              </div>
+              <p className="text-xs text-blue-200 mt-4">Limited same-day slots available</p>
+            </div>
+
+            {/* SAFETY & HYGIENE */}
+            <div className="mt-12">
+              <p className="text-xs font-semibold text-gray-500 mb-2">SAFETY & HYGIENE</p>
+              <h2 className="text-xl font-bold mb-4">Your safety is our priority:</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {[
+                  "Sterile cannulation process",
+                  "Single-use equipment",
+                  "Infection prevention protocols",
+                  "Continuous monitoring during drip",
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-2 text-sm text-gray-600 border rounded-lg p-3">
+                    <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                    {item}
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* FAQ */}
-            <div className="mt-14">
-              <p className="text-xs font-semibold text-gray-500 mb-2">
-                QUESTIONS
-              </p>
-              <h2 className="text-xl font-bold mb-4">
-                Frequently asked about IV cannulation
-              </h2>
+            <div className="mt-12">
+              <p className="text-xs font-semibold text-gray-500 mb-2">QUESTIONS</p>
+              <h2 className="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+              <FAQItem question="Is IV drip safe at home?" answer="Yes, our trained nurses ensure complete safety and hygiene." />
+              <FAQItem question="Do you handle difficult veins?" answer="Yes, our nurses are experienced in difficult IV access." />
+              <FAQItem question="Can I book same-day IV drip?" answer="Yes, based on availability in your location." />
+              <FAQItem question="Do I need a doctor's prescription?" answer="Yes, IV therapy requires a valid prescription." />
+              <FAQItem question="How long does the IV drip take?" answer="It depends on the fluid type, usually 30–90 minutes." />
+            </div>
 
-              <FAQItem
-                question="How do you verify your nurses?"
-                answer="Every nurse undergoes background verification, license validation, skill assessments, and 45 days of supervised shadowing."
-              />
-              <FAQItem
-                question="Can I pause or modify a care plan mid-way?"
-                answer="Absolutely. Your care manager can pause, reschedule, or upgrade services with 4-hour notice."
-              />
-              <FAQItem
-                question="Do you support insurance claims?"
-                answer="Yes, we provide itemised bills, medical records, and coordinate with insurers or TPAs."
-              />
+            {/* FINAL CTA */}
+            <div className="mt-12 border rounded-2xl p-8 text-center">
+              <h2 className="text-xl font-bold mb-2">Book IV drip at home today.</h2>
+              <p className="text-gray-500 mb-6">Safe. Comfortable. Professional care.</p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <button className="inline-flex items-center gap-2 bg-blue-700 text-white px-6 py-2.5 rounded-full hover:bg-blue-800 transition font-semibold text-sm">
+                  <Phone className="w-4 h-4" />
+                  Book Now
+                </button>
+                <a
+                  href="https://wa.me/919560505355?text=Hi%2C%20I%20need%20IV%20drip%20service%20at%20home.%20Please%20assist."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-2.5 rounded-full hover:bg-green-600 transition font-semibold text-sm"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp Now
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -214,9 +282,9 @@ export default function IVCannulationPage() {
 
 function StatCard({ title, value }: any) {
   return (
-    <div className="border rounded-xl p-6 text-center shadow-sm">
+    <div className="border rounded-xl p-4 text-center shadow-sm">
       <p className="text-xs text-gray-500 mb-1">{title}</p>
-      <p className="text-2xl font-bold">{value}</p>
+      <p className="text-2xl font-bold text-blue-700">{value}</p>
     </div>
   );
 }
@@ -243,17 +311,10 @@ function FAQItem({ question, answer }: any) {
         className="w-full flex items-center justify-between px-4 py-3 text-left"
       >
         <p className="text-sm font-medium text-gray-800">{question}</p>
-        <ChevronDown
-          className={`w-4 h-4 text-gray-400 transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
-        />
+        <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
-
       {open && (
-        <div className="px-4 pb-4 text-sm text-gray-600">
-          {answer}
-        </div>
+        <div className="px-4 pb-4 text-sm text-gray-600">{answer}</div>
       )}
     </div>
   );
