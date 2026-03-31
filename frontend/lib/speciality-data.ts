@@ -17,127 +17,64 @@ export const specialityPrograms: SpecialityProgram[] = [
   {
     slug: 'elderly-care-gda',
     title: 'Elderly Care (GDA)',
-    badge: 'DAILY LIVING SUPPORT',
-    subtitle: 'Dependable day-to-day support for seniors at home',
+    badge: '12 / 24 HOUR CARE PLAN',
+    subtitle: 'Daily support for senior citizens with comfort, safety, and dignity',
     shortDescription:
-      'Bathing support, feeding help, mobility assistance, companionship, and basic wellbeing observation for older adults.',
+      'Daily support for senior citizens at home with bathing, feeding, mobility, companionship, and basic observation.',
     description:
-      'This care program is designed for seniors who need steady physical support, emotional reassurance, and safe daily routines at home. Families get dependable caregivers trained to assist with comfort, mobility, hygiene, and observation.',
+      'Nursing Sarathi provides trained caregivers for elderly patients who need daily assistance at home. Our caregivers support routine care, emotional comfort, and safer living so seniors can stay at home with dignity and dependable help.',
     services: [
       'Bathing & hygiene assistance',
       'Feeding support',
-      'Mobility & walking assistance',
+      'Mobility & walking help',
       'Bed positioning',
       'Companionship',
-      'Basic condition observation',
+      'Basic health observation',
     ],
     highlights: [
-      'Best suited for seniors who need help with daily routines',
-      'Focused on comfort, dignity, and safe movement inside the home',
-      'Helpful for long-term elder support and family relief',
+      'Available in 12-hour and 24-hour care plans',
+      'Helpful for seniors living alone or needing daily assistance',
+      'Focused on comfort, dignity, and safer home routines',
     ],
     faqs: [
       {
         question: 'Who is this service best for?',
         answer:
-          'It is ideal for elderly patients who need regular non-clinical support with hygiene, meals, mobility, and companionship at home.',
+          'It is ideal for seniors living alone, bedridden elderly patients, and families who need dependable daily support at home.',
       },
       {
         question: 'Can families choose full-day or live-in support?',
         answer:
-          "Yes. We can align caregiving hours based on the patient's routine, dependency level, and family preference.",
-      },
-    ],
-  },
-  {
-    slug: 'home-nursing-services',
-    title: 'Home Nursing Services',
-    badge: 'CLINICAL CARE AT HOME',
-    subtitle: 'Doctor-prescribed nursing procedures delivered safely at home',
-    shortDescription:
-      'Injection administration, IV support, wound dressing, catheter care, vitals monitoring, and medication support as prescribed.',
-    description:
-      'This service is for patients who need skilled nursing procedures without repeated hospital visits. Our nurses follow clinical protocols and documented care plans so treatment continues safely and consistently at home.',
-    services: [
-      'Injection administration',
-      'IV support',
-      'Wound dressing',
-      'Catheter care',
-      'Vitals monitoring',
-      'Medication administration (as prescribed only)',
-    ],
-    highlights: [
-      'Built for short-term treatments and recurring nursing procedures',
-      'Suitable after discharge, during illness, or for chronic care needs',
-      'Clear documentation and observation with every scheduled visit',
-    ],
-    faqs: [
-      {
-        question: 'Do you administer medicines without a prescription?',
-        answer:
-          'No. Medication administration is provided only when it is part of a doctor-prescribed treatment plan.',
+          "Yes. We can align care as 12-hour or 24-hour support based on the patient's condition, routine, and family preference.",
       },
       {
-        question: 'Can this service be booked for repeat visits?',
+        question: 'What kind of help is included in elder care?',
         answer:
-          'Yes. We support one-time visits as well as recurring nursing schedules depending on the treatment plan.',
-      },
-    ],
-  },
-  {
-    slug: 'post-surgery-care',
-    title: 'Post-Surgery Care',
-    badge: 'RECOVERY SUPPORT',
-    subtitle: 'Structured post-operative care for smoother healing at home',
-    shortDescription:
-      'Wound management, recovery supervision, mobility support, infection monitoring, and doctor-prescribed care execution.',
-    description:
-      'This program helps patients recover safely after surgery with close attention to wound care, mobility, infection risk, and physician instructions. It reduces the burden on families while keeping recovery organized at home.',
-    services: [
-      'Wound management',
-      'Recovery supervision',
-      'Mobility support',
-      'Infection monitoring',
-      'Doctor-prescribed care execution',
-    ],
-    highlights: [
-      'Useful after orthopedic, abdominal, or general surgery discharge',
-      'Combines supervision, comfort support, and care-plan follow-through',
-      'Helps families catch recovery concerns early',
-    ],
-    faqs: [
-      {
-        question: 'Can this service start immediately after discharge?',
-        answer:
-          'Yes. We can align the care plan around discharge instructions so support begins as soon as the patient returns home.',
-      },
-      {
-        question: 'Do you monitor for post-operative infection signs?',
-        answer:
-          'Yes. Nurses watch for warning signs such as redness, swelling, fever, discharge changes, and delayed healing, then escalate concerns promptly.',
+          'The care plan can include hygiene support, feeding help, mobility assistance, bed positioning, companionship, and basic observation.',
       },
     ],
   },
   {
     slug: 'icu-trained-nurse-at-home',
     title: 'ICU-Trained Nurse at Home',
-    badge: 'ADVANCED NURSING SUPPORT',
-    subtitle: 'High-acuity nursing care for medically complex patients at home',
+    badge: 'HIGH PRIORITY CARE',
+    subtitle: 'Advanced medical care for critical patients at home',
     shortDescription:
-      'Tracheostomy care, tube feeding, critical vitals monitoring, advanced nursing support, and medical record maintenance.',
+      'ICU-level monitoring, tracheostomy care, tube feeding support, and advanced nursing care at home.',
     description:
-      'This program is meant for patients who require advanced nursing oversight after critical illness, prolonged hospitalization, or intensive treatment. ICU-trained nurses help families manage complex clinical needs with discipline and confidence.',
+      'Nursing Sarathi provides ICU-trained nurses for patients who need continuous monitoring and advanced clinical care at home. This service is built for serious conditions where hospital-level attention, disciplined observation, and skilled handling are required outside the hospital.',
     services: [
+      'ICU-level monitoring',
       'Tracheostomy care',
-      'Tube feeding',
-      'Critical vitals monitoring',
+      'Tube feeding support',
+      'Medication administration',
+      'Critical patient handling',
       'Advanced nursing support',
-      'Medical record maintenance',
     ],
     highlights: [
-      'Appropriate for high-dependency or medically complex home care',
-      'Supports continuity after ICU discharge or serious illness',
-      'Emphasis on close monitoring, documentation, and escalation readiness',
+      'Available in 12-hour and 24-hour plans',
+      'Suitable after ICU discharge and for high-dependency cases',
+      'Focused on close monitoring, escalation readiness, and clinical discipline',
     ],
     faqs: [
       {
@@ -146,9 +83,131 @@ export const specialityPrograms: SpecialityProgram[] = [
           'This is the right fit when a patient needs advanced monitoring, airway or feeding-tube care, or close nursing oversight beyond routine home visits.',
       },
       {
-        question: 'Do nurses maintain daily clinical notes?',
+        question: 'Can ICU care really be managed at home?',
         answer:
-          'Yes. Medical record maintenance is part of the service so families and treating doctors have a clear care history.',
+          'Yes. With the right equipment, doctor guidance, and an ICU-trained nurse, many patients can receive structured critical care safely at home.',
+      },
+      {
+        question: 'What kind of support does the nurse provide?',
+        answer:
+          'Support can include vitals monitoring, tracheostomy care, tube feeding support, medication administration, and critical patient handling.',
+      },
+    ],
+  },
+  {
+    slug: 'japa-care-mother-baby',
+    title: 'Japa Care (Mother & Baby)',
+    badge: 'MOTHER & BABY CARE',
+    subtitle: 'Complete care for mother and newborn after delivery',
+    shortDescription:
+      'Newborn baby care, mother recovery support, feeding assistance, and routine help after delivery.',
+    description:
+      'Nursing Sarathi provides experienced caregivers for post-delivery care of mother and baby. We support newborn handling, hygiene, recovery routines, and feeding assistance so families feel confident during the first days and weeks after delivery.',
+    services: [
+      'Baby bathing & care',
+      'Mother hygiene support',
+      'Feeding assistance',
+      'Sleep & routine management',
+      'Basic monitoring',
+    ],
+    highlights: [
+      'Available in 12-hour and 24-hour plans',
+      "Supports both newborn care and the mother's recovery",
+      'Helpful for families who need experienced post-delivery support at home',
+    ],
+    faqs: [
+      {
+        question: 'Who is this service best for?',
+        answer:
+          'It is ideal for new mothers, newborn babies, and families who want experienced help during post-delivery recovery at home.',
+      },
+      {
+        question: 'What kind of care is included in Japa support?',
+        answer:
+          'The plan can include baby care, mother hygiene support, feeding assistance, routine management, and basic monitoring.',
+      },
+      {
+        question: 'Can families choose day or full-time support?',
+        answer:
+          "Yes. We can arrange 12-hour or 24-hour care based on the family's schedule and support needs.",
+      },
+    ],
+  },
+  {
+    slug: 'home-nursing-services',
+    title: 'Home Nursing Services',
+    badge: 'MEDICAL PROCEDURES',
+    subtitle: 'Medical procedures at home by trained nurses',
+    shortDescription:
+      'Injection and IV support, wound dressing, catheter care, and feeding tube support at home.',
+    description:
+      'Nursing Sarathi offers professional nursing services at home for patients who need medical procedures without repeated hospital visits. Our nurses follow hygiene protocols and documented care steps to deliver safe, comfortable treatment at home.',
+    services: [
+      'Injection administration',
+      'IV drip support',
+      'Wound dressing',
+      'Catheter care',
+      'Feeding tube support',
+    ],
+    highlights: [
+      'Available as flexible visits and plan-based support',
+      'Useful for patients who need procedures without hospital travel',
+      'Focused on safe, hygienic, and skilled nursing execution at home',
+    ],
+    faqs: [
+      {
+        question: 'What services are included in home nursing?',
+        answer:
+          'Home nursing can include injection support, IV drip administration, wound dressing, catheter care, and feeding tube support.',
+      },
+      {
+        question: 'Can this service be booked for repeat visits?',
+        answer:
+          "Yes. We support one-time procedures as well as scheduled repeat visits depending on the patient's treatment plan.",
+      },
+      {
+        question: 'Is a hospital visit necessary for routine nursing procedures?',
+        answer:
+          'Not always. Many prescribed nursing procedures can be handled safely at home by trained nurses with proper precautions.',
+      },
+    ],
+  },
+  {
+    slug: 'post-surgery-care',
+    title: 'Post Surgery Care',
+    badge: 'RECOVERY CARE',
+    subtitle: 'Smooth recovery after hospital discharge',
+    shortDescription:
+      'Wound care, mobility support, infection monitoring, and recovery observation after surgery.',
+    description:
+      'Nursing Sarathi helps patients recover safely at home after surgery with professional care and monitoring. The service is built to reduce stress after discharge and support healing through structured recovery assistance.',
+    services: [
+      'Wound dressing',
+      'Infection monitoring',
+      'Mobility assistance',
+      'Medication support',
+      'Recovery observation',
+    ],
+    highlights: [
+      'Available in 12-hour and 24-hour care plans',
+      'Useful after orthopedic, abdominal, or general surgery discharge',
+      'Helps families manage recovery safely without repeated hospital trips',
+    ],
+    faqs: [
+      {
+        question: 'Who should choose post-surgery care at home?',
+        answer:
+          'It is ideal for patients returning home after surgery who need monitoring, wound care, mobility help, or structured recovery support.',
+      },
+      {
+        question: 'What kind of support is included after discharge?',
+        answer:
+          'Support can include wound dressing, infection monitoring, mobility assistance, medication help, and recovery observation.',
+      },
+      {
+        question: 'Can recovery care start immediately after discharge?',
+        answer:
+          'Yes. The care plan can begin as soon as the patient reaches home, based on discharge instructions and support requirements.',
       },
     ],
   },

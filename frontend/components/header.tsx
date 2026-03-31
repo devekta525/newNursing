@@ -30,24 +30,46 @@ import {
   Bandage,
   User,
   LogOut,
+  type LucideIcon,
 } from 'lucide-react';
 
 import { Button } from './ui/button';
 import { useAuth } from '@/components/auth/auth-provider';
 import { specialityPrograms } from '@/lib/speciality-data';
 
-const specialityIcons = [Users, HeartPulse, Activity, ShieldCheck];
+const specialityIcons = [Users, ShieldCheck, HeartPulse, Stethoscope, Activity];
+
+type NavSubItem = {
+  icon: LucideIcon;
+  label: string;
+  href: string;
+  description?: string;
+};
+
+type NavLinkItem = {
+  type: 'link';
+  icon: LucideIcon;
+  label: string;
+  href: string;
+};
+
+type NavDropdownItem = {
+  type: 'dropdown';
+  label: string;
+  icon: LucideIcon;
+  items: NavSubItem[];
+};
 
 /* ================= NAV ITEMS ================= */
 
-const specialityItems = specialityPrograms.map((program, index) => ({
+const specialityItems: NavSubItem[] = specialityPrograms.map((program, index) => ({
   icon: specialityIcons[index] ?? ClipboardList,
   label: program.title,
   description: program.shortDescription,
   href: `/speciality/${program.slug}`,
 }));
 
-const navItems = [
+const navItems: Array<NavLinkItem | NavDropdownItem> = [
   { type: 'link', icon: Home, label: 'Home', href: '/' },
 
   {
@@ -279,7 +301,7 @@ export default function Header() {
                             className="overflow-hidden border-t border-slate-200"
                           >
                             <div className="space-y-1 px-3 py-3">
-                              {item.items.map((subItem: any, subIndex: number) => (
+                              {item.items.map((subItem, subIndex) => (
                                 <Link
                                   key={subIndex}
                                   href={subItem.href}
@@ -352,7 +374,7 @@ export default function Header() {
 
 /* ================= NAV LINK ================= */
 
-function NavLink({ icon: Icon, label, href }: any) {
+function NavLink({ icon: Icon, label, href }: NavLinkItem) {
 
 return (
 
@@ -373,7 +395,7 @@ className="flex items-center gap-1 px-2 py-2 rounded-md whitespace-nowrap text-g
 
 /* ================= NAV DROPDOWN ================= */
 
-function NavDropdown({ label, icon: Icon, items }: any) {
+function NavDropdown({ label, icon: Icon, items }: NavDropdownItem) {
 
 return (
 
