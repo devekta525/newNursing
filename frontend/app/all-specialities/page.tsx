@@ -23,6 +23,9 @@ const PHONE_DISPLAY = '+91 95605 05355';
 const EXPERT_WHATSAPP = buildWhatsAppUrl(
   'Hi, I need help choosing the right home care plan. Please assist.',
 );
+const BOOK_CARE_WHATSAPP = buildWhatsAppUrl(
+  'Hi, I want to book a home care plan with Nursing Sarathi. Please assist.',
+);
 
 type PrimaryCard = {
   title: string;
@@ -51,9 +54,38 @@ type MiniCard = {
 };
 
 const HERO_POINTS = [
-  'Verified & trained nurses',
-  '12-hour & 24-hour packages',
-  'Continuous & critical care',
+  'Available in 12 Hour & 24 Hour Care Plans',
+  'Verified, trained, and skill-assigned professionals',
+  'Daily, recovery, and critical care options',
+  'Fast coordination with expert care guidance',
+];
+
+const HERO_TAGS = [
+  'Elderly Care (GDA)',
+  'ICU Trained Nurse at Home',
+  'Japa Care (Mother & Baby)',
+  'Home Nursing Services',
+  'Post Surgery Care',
+];
+
+const SUPPORT_OPTIONS = [
+  {
+    title: '12 Hour Care',
+    description:
+      'Planned day or night support for patients who need active help in a defined care slot.',
+  },
+  {
+    title: '24 Hour Care',
+    description:
+      'Full-time assistance for patients who need continuous observation, comfort, and bedside support.',
+  },
+];
+
+const SUPPORT_STATS = [
+  { value: '5', label: 'Live speciality plans' },
+  { value: '35,000+', label: 'Care plans delivered' },
+  { value: '24 x 7', label: 'Support availability' },
+  { value: 'India', label: 'Trusted by families' },
 ];
 
 const PRIMARY_CARDS: PrimaryCard[] = [
@@ -161,55 +193,115 @@ export default function AllSpecialitiesPage() {
         <Header />
 
         <main className="mx-auto mt-18 max-w-6xl px-4 py-8 sm:px-5 sm:py-10 lg:px-6">
-          <section className="relative overflow-hidden rounded-[28px] border border-slate-200 bg-slate-900 shadow-[0_28px_70px_rgba(15,23,42,0.18)]">
+          <section className="relative overflow-hidden rounded-[32px] border border-blue-300/20 bg-[linear-gradient(135deg,#1e3a8a_0%,#1d4ed8_58%,#0f766e_100%)] shadow-[0_32px_80px_rgba(15,23,42,0.22)]">
             <Image
               src="/feeding.png"
               alt="Nursing Sarathi home care support"
               fill
               priority
-              className="object-cover object-[74%_center]"
+              className="object-cover object-[84%_center] opacity-40 lg:opacity-60"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(30,41,59,0.94)_0%,rgba(29,78,216,0.78)_40%,rgba(15,23,42,0.12)_100%)]" />
-            <div className="relative grid min-h-[420px] content-center p-5 sm:min-h-[460px] sm:p-8 lg:min-h-[500px] lg:p-10">
-              <div className="max-w-xl">
-                <span className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/90">
-                  Nursing Sarathi
+            <div className="absolute inset-0 bg-[linear-gradient(96deg,rgba(15,23,42,0.96)_0%,rgba(29,78,216,0.90)_42%,rgba(37,99,235,0.68)_70%,rgba(15,23,42,0.12)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:28px_28px]" />
+
+            <div className="relative grid gap-8 p-5 sm:p-8 lg:min-h-[540px] lg:grid-cols-[1.18fr_0.82fr] lg:items-center lg:p-10">
+              <div className="max-w-3xl">
+                <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/95">
+                  Home Care Plans
                 </span>
 
-                <h1 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-[2.8rem]">
+                <h1 className="mt-5 max-w-4xl text-3xl font-semibold leading-[1.08] text-white sm:text-4xl lg:text-[3.7rem]">
                   Specialized Home Care Services by Nursing Sarathi
                 </h1>
 
-                <p className="mt-3 max-w-lg text-sm leading-7 text-blue-50/90 sm:text-base">
-                  Expert medical care at home for elderly, post-surgery, newborn,
-                  and critical care patients with trained professionals.
+                <p className="mt-5 max-w-3xl text-base leading-8 text-blue-50/92 sm:text-lg">
+                  Get expert medical and daily care at home with trained professionals.
+                  Every plan is designed around real patient needs, from elder care to
+                  ICU-level support.
                 </p>
 
-                <div className="mt-5 space-y-2.5">
+                <div className="mt-6 flex flex-wrap gap-2.5">
+                  {HERO_TAGS.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-white/15 bg-white/10 px-3.5 py-2 text-sm font-medium text-white/92 backdrop-blur"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   {HERO_POINTS.map((point) => (
-                    <div key={point} className="flex items-center gap-2.5 text-sm text-white/90">
-                      <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" />
-                      <span>{point}</span>
+                    <div
+                      key={point}
+                      className="flex items-start gap-3 rounded-[20px] border border-white/10 bg-white/10 px-4 py-3.5 text-white/92 backdrop-blur-sm"
+                    >
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-200" />
+                      <span className="text-sm font-medium leading-7 sm:text-base">{point}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <SmartLink
-                    href={EXPERT_WHATSAPP}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                    href={BOOK_CARE_WHATSAPP}
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
                   >
-                    <MessageCircle className="h-4 w-4" />
-                    Talk to Care Expert
+                    Book Care Now
+                    <ArrowRight className="h-4 w-4" />
                   </SmartLink>
 
                   <SmartLink
-                    href={PHONE}
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
+                    href={EXPERT_WHATSAPP}
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
                   >
                     <Phone className="h-4 w-4" />
-                    {PHONE_DISPLAY}
+                    Talk to Expert
                   </SmartLink>
+                </div>
+              </div>
+
+              <div className="relative lg:justify-self-end">
+                <div className="rounded-[30px] border border-white/15 bg-white/10 p-3 shadow-[0_18px_50px_rgba(15,23,42,0.16)] backdrop-blur-sm sm:p-4">
+                  <div className="rounded-[26px] bg-white p-5 text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.10)] sm:p-6">
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-700">
+                      Structured Support
+                    </p>
+                    <h2 className="mt-3 text-2xl font-semibold leading-tight text-slate-900 sm:text-[2rem]">
+                      Choose the right home care plan before the condition becomes harder to manage.
+                    </h2>
+
+                    <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                      {SUPPORT_OPTIONS.map((item) => (
+                        <div
+                          key={item.title}
+                          className="rounded-[20px] border border-slate-200 bg-slate-50 px-4 py-4 shadow-sm"
+                        >
+                          <p className="text-base font-semibold text-slate-900">{item.title}</p>
+                          <p className="mt-2 text-sm leading-7 text-slate-600">
+                            {item.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                      {SUPPORT_STATS.map((stat) => (
+                        <div
+                          key={stat.label}
+                          className="rounded-[20px] border border-slate-200 bg-white px-4 py-4 shadow-sm"
+                        >
+                          <p className="text-[2rem] font-semibold leading-none text-slate-900">
+                            {stat.value}
+                          </p>
+                          <p className="mt-3 text-xs font-medium uppercase tracking-[0.22em] text-slate-500">
+                            {stat.label}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

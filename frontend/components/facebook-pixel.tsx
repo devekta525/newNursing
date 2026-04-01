@@ -1,11 +1,32 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
 
-const pixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID
+const pixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID ?? '919391330877527'
+
+type FacebookWindow = Window & {
+  fbq?: (...args: unknown[]) => void
+}
 
 export function FacebookPixel() {
-  if (!pixelId) return null
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const hasTrackedInitialPage = useRef(false)
+  const search = searchParams.toString()
+
+  useEffect(() => {
+    const fbq = (window as FacebookWindow).fbq
+    if (!fbq) return
+
+    if (!hasTrackedInitialPage.current) {
+      hasTrackedInitialPage.current = true
+      return
+    }
+
+    fbq('track', 'PageView')
+  }, [pathname, search])
 
   return (
     <>
