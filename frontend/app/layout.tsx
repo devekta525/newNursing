@@ -1,6 +1,5 @@
-import React from "react"
+import React, { Suspense } from "react"
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { WhatsAppButton } from '@/components/whatsapp-button';
@@ -8,9 +7,6 @@ import { FacebookPixel } from '@/components/facebook-pixel';
 import { GoogleTag } from '@/components/google-tag';
 import { AuthProvider } from '@/components/auth/auth-provider';
 import { PageTransition } from '@/components/animations/page-transition';
-
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -40,8 +36,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
-        <GoogleTag />
-        <FacebookPixel />
+        <Suspense fallback={null}>
+          <GoogleTag />
+          <FacebookPixel />
+        </Suspense>
         <AuthProvider>
           <PageTransition>{children}</PageTransition>
           <WhatsAppButton />
