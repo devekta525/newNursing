@@ -38,11 +38,62 @@ export const updateProfile = async (req, res, next) => {
       return sendError(res, 400, 'Validation failed', errors.array());
     }
 
-    const { name, phone } = req.body;
+    const {
+      name,
+      phone,
+      qualification,
+      workExperience,
+      currentlyWorking,
+      currentCompany,
+      currentRole,
+    } = req.body;
     const updateData = {};
+    const hasOwnProperty = (key) => Object.prototype.hasOwnProperty.call(req.body, key);
+    const normalizeOptionalText = (value) => {
+      if (typeof value !== 'string') {
+        return null;
+      }
 
-    if (name) updateData.name = name;
-    if (phone) updateData.phone = phone;
+      const trimmedValue = value.trim();
+      return trimmedValue ? trimmedValue : null;
+    };
+    const hasCurrentlyWorking = hasOwnProperty('currentlyWorking');
+    const normalizedCurrentlyWorking = hasCurrentlyWorking
+      ? currentlyWorking === true || currentlyWorking === 'true'
+      : undefined;
+
+    if (hasOwnProperty('name')) {
+      updateData.name = name;
+    }
+
+    if (hasOwnProperty('phone')) {
+      updateData.phone = normalizeOptionalText(phone);
+    }
+
+    if (hasOwnProperty('qualification')) {
+      updateData.qualification = normalizeOptionalText(qualification);
+    }
+
+    if (hasOwnProperty('workExperience')) {
+      updateData.workExperience = normalizeOptionalText(workExperience);
+    }
+
+    if (hasCurrentlyWorking) {
+      updateData.currentlyWorking = normalizedCurrentlyWorking;
+
+      if (!normalizedCurrentlyWorking) {
+        updateData.currentCompany = null;
+        updateData.currentRole = null;
+      }
+    }
+
+    if (hasOwnProperty('currentCompany') && normalizedCurrentlyWorking !== false) {
+      updateData.currentCompany = normalizeOptionalText(currentCompany);
+    }
+
+    if (hasOwnProperty('currentRole') && normalizedCurrentlyWorking !== false) {
+      updateData.currentRole = normalizeOptionalText(currentRole);
+    }
 
     const user = await User.findByIdAndUpdate(
       req.userId,

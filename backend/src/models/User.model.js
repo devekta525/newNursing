@@ -28,6 +28,34 @@ const userSchema = new mongoose.Schema(
       trim: true,
       match: [/^\d{10}$/, 'Phone number must be exactly 10 digits'],
     },
+    qualification: {
+      type: String,
+      trim: true,
+      maxlength: [200, 'Qualification cannot exceed 200 characters'],
+      default: null,
+    },
+    workExperience: {
+      type: String,
+      trim: true,
+      maxlength: [1000, 'Work experience cannot exceed 1000 characters'],
+      default: null,
+    },
+    currentlyWorking: {
+      type: Boolean,
+      default: false,
+    },
+    currentCompany: {
+      type: String,
+      trim: true,
+      maxlength: [200, 'Current company cannot exceed 200 characters'],
+      default: null,
+    },
+    currentRole: {
+      type: String,
+      trim: true,
+      maxlength: [200, 'Current role cannot exceed 200 characters'],
+      default: null,
+    },
     password: {
       type: String,
       required: [true, 'Password is required'],

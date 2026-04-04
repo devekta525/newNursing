@@ -12,7 +12,18 @@ import { generateAccessToken } from '../utils/token.js';
  * @returns {Promise<Object>} - Created user object
  */
 export const registerUser = async (userData) => {
-  const { name, email, phone, password, role = 'USER' } = userData;
+  const {
+    name,
+    email,
+    phone,
+    qualification,
+    workExperience,
+    currentlyWorking,
+    currentCompany,
+    currentRole,
+    password,
+    role = 'USER',
+  } = userData;
 
   // Check if user already exists
   const existingUser = await User.findOne({ email: email.toLowerCase() });
@@ -25,6 +36,11 @@ export const registerUser = async (userData) => {
     name,
     email: email.toLowerCase(),
     phone,
+    qualification,
+    workExperience,
+    currentlyWorking,
+    currentCompany,
+    currentRole,
     password,
     role,
   });

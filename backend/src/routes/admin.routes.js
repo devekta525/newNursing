@@ -54,6 +54,8 @@ const updateStatusValidation = [
 
 // Routes
 router.post('/create-subadmin', requireAdmin, createSubAdminValidation, adminController.createSubAdmin);
+router.get('/users/report', requireAdminOrSubAdmin, adminController.downloadUsersReport);
+router.get('/users', requireAdminOrSubAdmin, adminController.getUsers);
 router.get('/subadmins', requireAdmin, adminController.getSubAdmins);
 router.delete('/subadmin/:id', requireAdmin, adminController.deleteSubAdmin);
 router.put('/subadmin/:id/password', requireAdminOrSubAdmin, updatePasswordValidation, adminController.updateSubAdminPassword);

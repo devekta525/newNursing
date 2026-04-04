@@ -2,7 +2,47 @@ import { validationResult } from 'express-validator';
 import { sendSuccess, sendError } from '../utils/response.js';
 import User from '../models/User.model.js';
 import { canManageRole, getManageableRoles } from '../config/roles.js';
-import * as authService from '../services/auth.service.js';
+
+const DEFAULT_USERS_LIMIT = 10;
+const MAX_USERS_LIMIT = 100;
+
+const parsePositiveInteger = (value, fallback) => {
+  const parsedValue = Number.parseInt(value, 10);
+
+  if (Number.isNaN(parsedValue) || parsedValue < 1) {
+    return fallback;
+  }
+
+  return parsedValue;
+};
+
+const buildManageableUsersQuery = (userRole) => {
+  const manageableRoles = getManageableRoles(userRole);
+
+  if (manageableRoles.length === 0) {
+    return { _id: null };
+  }
+
+  return {
+    role: { $in: manageableRoles },
+  };
+};
+
+const formatCsvValue = (value) => {
+  if (value === null || value === undefined) {
+    return '';
+  }
+
+  const normalizedValue =
+    value instanceof Date ? value.toISOString() : String(value);
+  const escapedValue = normalizedValue.replace(/"/g, '""');
+
+  if (/[",\n]/.test(escapedValue)) {
+    return `"${escapedValue}"`;
+  }
+
+  return escapedValue;
+};
 
 /**
  * Admin Controller
@@ -85,6 +125,105 @@ export const getSubAdmins = async (req, res, next) => {
         pages: Math.ceil(total / limit),
       },
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Get all users available to the current admin role
+ * GET /api/admin/users
+ */
+export const getUsers = async (req, res, next) => {
+  try {
+    const page = parsePositiveInteger(req.query.page, 1);
+    const requestedLimit = parsePositiveInteger(req.query.limit, DEFAULT_USERS_LIMIT);
+    const limit = Math.min(requestedLimit, MAX_USERS_LIMIT);
+    const skip = (page - 1) * limit;
+    const query = buildManageableUsersQuery(req.userRole);
+
+    const users = await User.find(query)
+      .select('-password')
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await User.countDocuments(query);
+
+    return sendSuccess(res, 200, 'Users retrieved successfully', {
+      users,
+      pagination: {
+        page,
+        limit,
+        total,
+        pages: Math.max(Math.ceil(total / limit), 1),
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Download a CSV report for all users available to the current admin role
+ * GET /api/admin/users/report
+ */
+export const downloadUsersReport = async (req, res, next) => {
+  try {
+    const query = buildManageableUsersQuery(req.userRole);
+
+    const users = await User.find(query)
+      .select('-password')
+      .sort({ createdAt: -1 });
+
+    const headers = [
+      'ID',
+      'Name',
+      'Email',
+      'Phone',
+      'Qualification',
+      'Work Experience',
+      'Currently Working',
+      'Current Company',
+      'Current Role',
+      'Role',
+      'Is Active',
+      'Created At',
+      'Updated At',
+      'Last Login',
+    ];
+
+    const rows = users.map((user) => [
+      user._id.toString(),
+      user.name,
+      user.email,
+      user.phone || '',
+      user.qualification || '',
+      user.workExperience || '',
+      user.currentlyWorking,
+      user.currentCompany || '',
+      user.currentRole || '',
+      user.role,
+      user.isActive,
+      user.createdAt,
+      user.updatedAt,
+      user.lastLogin || '',
+    ]);
+
+    const csvContent = [
+      headers.map(formatCsvValue).join(','),
+      ...rows.map((row) => row.map(formatCsvValue).join(',')),
+    ].join('\n');
+
+    const reportDate = new Date().toISOString().split('T')[0];
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="users-report-${reportDate}.csv"`
+    );
+
+    return res.status(200).send(`\uFEFF${csvContent}`);
   } catch (error) {
     next(error);
   }
