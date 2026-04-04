@@ -26,6 +26,8 @@ export type AdminJob = {
   createdAt: string;
 };
 
+export type AdminListUser = AuthUser;
+
 export type JobApplication = {
   _id: string;
   status: 'Applied' | 'Shortlisted' | 'Rejected' | 'Hired';
@@ -100,6 +102,16 @@ type SubAdminsResponseData = {
   subAdmins: SubAdminUser[];
 };
 
+type UsersResponseData = {
+  users: AdminListUser[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    pages: number;
+  };
+};
+
 type BlogsResponseData = {
   blogs: AdminBlog[];
   pagination: {
@@ -145,6 +157,20 @@ function normalizeErrorMessage(message: string, errors?: ApiErrorDetail[]) {
   }
 
   return errors[0].msg || errors[0].message || message;
+}
+
+function extractFilenameFromDisposition(contentDisposition: string | null) {
+  if (!contentDisposition) {
+    return null;
+  }
+
+  const utf8Match = contentDisposition.match(/filename\*=UTF-8''([^;]+)/i);
+  if (utf8Match?.[1]) {
+    return decodeURIComponent(utf8Match[1]);
+  }
+
+  const fallbackMatch = contentDisposition.match(/filename="?([^"]+)"?/i);
+  return fallbackMatch?.[1] ?? null;
 }
 
 async function request<T>(path: string, init: RequestInit = {}) {
@@ -234,6 +260,63 @@ export async function updateJobApplicationStatus(
 export async function getSubAdmins() {
   const response = await request<SubAdminsResponseData>('/admin/subadmins');
   return response.data?.subAdmins ?? [];
+}
+
+export async function getAdminUsers(params?: {
+  page?: number;
+  limit?: number;
+}) {
+  const query = new URLSearchParams();
+
+  if (params?.page) {
+    query.set('page', String(params.page));
+  }
+
+  if (params?.limit) {
+    query.set('limit', String(params.limit));
+  }
+
+  const suffix = query.toString() ? `?${query.toString()}` : '';
+  const response = await request<UsersResponseData>(`/admin/users${suffix}`);
+
+  return {
+    users: response.data?.users ?? [],
+    pagination: response.data?.pagination ?? {
+      total: 0,
+      page: params?.page ?? 1,
+      limit: params?.limit ?? 10,
+      pages: 1,
+    },
+  };
+}
+
+export async function downloadAdminUsersReport() {
+  const session = getAdminSession();
+
+  const response = await fetch(`${getApiBaseUrl()}/admin/users/report`, {
+    headers: {
+      Authorization: `Bearer ${session.accessToken}`,
+      Accept: 'text/csv',
+    },
+  });
+
+  if (!response.ok) {
+    const payload = (await response.json().catch(() => null)) as ApiResponse<never> | null;
+
+    throw new Error(
+      normalizeErrorMessage(
+        payload?.message ?? 'Unable to download users report.',
+        payload?.errors
+      )
+    );
+  }
+
+  return {
+    blob: await response.blob(),
+    filename:
+      extractFilenameFromDisposition(response.headers.get('content-disposition')) ??
+      'users-report.csv',
+  };
 }
 
 export async function getAdminBlogs(params?: {

@@ -155,12 +155,9 @@ export default function GurugramLocationPage() {
               <ul className="space-y-3 text-sm text-gray-600">
                 <li className="flex gap-2">
                   <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5" />
-                  Dedicated city helpline +91 8800-999-001
+                  Dedicated city helpline +91 9560505355
                 </li>
-                <li className="flex gap-2">
-                  <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5" />
-                  Partner hospitals: Medanta, Artemis, Fortis
-                </li>
+                
                 <li className="flex gap-2">
                   <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5" />
                   Multi-lingual care teams

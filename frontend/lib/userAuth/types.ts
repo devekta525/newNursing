@@ -15,7 +15,12 @@ export type AuthUser = {
   _id: string;
   name: string;
   email: string;
-  phone?: string;
+  phone?: string | null;
+  qualification?: string | null;
+  workExperience?: string | null;
+  currentlyWorking?: boolean;
+  currentCompany?: string | null;
+  currentRole?: string | null;
   role: 'ADMIN' | 'SUB_ADMIN' | 'USER';
   isActive: boolean;
   createdAt: string;

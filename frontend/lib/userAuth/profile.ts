@@ -57,7 +57,12 @@ type ProfileResponseData = {
 
 export type UpdateProfilePayload = {
   name?: string;
-  phone?: string;
+  phone?: string | null;
+  qualification?: string | null;
+  workExperience?: string | null;
+  currentlyWorking?: boolean;
+  currentCompany?: string | null;
+  currentRole?: string | null;
 };
 
 export async function getMyProfile() {

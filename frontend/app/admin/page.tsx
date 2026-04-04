@@ -12,12 +12,14 @@ import {
   LogOut,
   PhoneCall,
   Shield,
+  Users,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useAuth } from '@/components/auth/auth-provider';
+import { UsersManagement } from '@/app/admin/users-management';
 import {
   createAdminBlog,
   createAdminJob,
@@ -46,10 +48,11 @@ import {
 } from '@/lib/admin/api';
 import { readAuthSession } from '@/lib/userAuth/storage';
 
-type AdminTab = 'overview' | 'jobs' | 'blogs' | 'applications' | 'leads' | 'subadmins';
+type AdminTab = 'overview' | 'users' | 'jobs' | 'blogs' | 'applications' | 'leads' | 'subadmins';
 
 const tabs: Array<{ id: AdminTab; label: string; icon: typeof LayoutDashboard }> = [
   { id: 'overview', label: 'Overview', icon: LayoutDashboard },
+  { id: 'users', label: 'Users', icon: Users },
   { id: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
   { id: 'blogs', label: 'Blogs', icon: FileText },
   { id: 'applications', label: 'Applications', icon: ClipboardList },
@@ -758,6 +761,7 @@ export default function AdminPage() {
                     </CardHeader>
                     <CardContent className="space-y-3 text-sm text-slate-600">
                       <p>`/api/auth/login` handles admin and sub-admin login based on `user.role`.</p>
+                      <p>`/api/admin/users` now provides paginated user listing and CSV report downloads.</p>
                       <p>`/api/admin/*` supports sub-admin management for ADMIN users.</p>
                       <p>`/api/blogs` now drives blog create, update, list, and admin-only delete.</p>
                       <p>`/api/jobs/admin/all` and `/api/applications/job/:jobId` drive jobs and applications.</p>
@@ -766,6 +770,8 @@ export default function AdminPage() {
                   </Card>
                 </div>
               )}
+
+              {activeTab === 'users' && <UsersManagement userRole={user.role} />}
 
               {activeTab === 'jobs' && (
                 <div className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
