@@ -110,20 +110,20 @@ const navItems: Array<NavLinkItem | NavDropdownItem> = [
 
   { type: 'link', icon: BriefcaseMedical, label: 'Careers', href: '/careers' },
 
-  {
-    type: 'dropdown',
-    label: 'Locations',
-    icon: MapPin,
-    items: [
-      { icon: Building2, label: "Nursingsarathi Gurugram", href: "/locations-gurugram" },
-      { icon: Building2, label: "Nursingsarathi Lucknow", href: "/locations-lucknow" },
-      { icon: Building2, label: "Nursingsarathi Patna", href: "/locations-patna" },
-      { icon: Building2, label: "Nursingsarathi Indore", href: "/locations-indore" },
-      { icon: Building2, label: "Nursingsarathi Noida", href: "/locations-noida" },
-      { icon: Building2, label: "Nursingsarathi Ranchi", href: "/locations-ranchi" },
-      { icon: Building2, label: "Nursingsarathi Mediclinics", href: "/mediclinics" },
-    ]
-  },
+  // {
+  //   type: 'dropdown',
+  //   label: 'Locations',
+  //   icon: MapPin,
+  //   items: [
+  //     { icon: Building2, label: "Nursingsarathi Gurugram", href: "/locations-gurugram" },
+  //     { icon: Building2, label: "Nursingsarathi Lucknow", href: "/locations-lucknow" },
+  //     { icon: Building2, label: "Nursingsarathi Patna", href: "/locations-patna" },
+  //     { icon: Building2, label: "Nursingsarathi Indore", href: "/locations-indore" },
+  //     { icon: Building2, label: "Nursingsarathi Noida", href: "/locations-noida" },
+  //     { icon: Building2, label: "Nursingsarathi Ranchi", href: "/locations-ranchi" },
+  //     { icon: Building2, label: "Nursingsarathi Mediclinics", href: "/mediclinics" },
+  //   ]
+  // },
 
   // {
   //   type: 'dropdown',
