@@ -1,15 +1,8 @@
 import type { ApiResponse } from '@/lib/userAuth/types';
-
-const DEFAULT_API_BASE_URL = 'http://localhost:5000/api';
-
-function getApiBaseUrl() {
-  return (
-    process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/+$/, '') ?? DEFAULT_API_BASE_URL
-  );
-}
+import { getClientApiBaseUrl } from '@/lib/api/client';
 
 function buildUrl(path: string) {
-  return `${getApiBaseUrl()}${path}`;
+  return `${getClientApiBaseUrl()}${path}`;
 }
 
 function normalizeErrorMessage(message: string, errors?: ApiResponse<unknown>['errors']) {

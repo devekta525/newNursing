@@ -1,4 +1,5 @@
 import { readAuthSession } from '@/lib/userAuth/storage';
+import { getClientApiBaseUrl } from '@/lib/api/client';
 
 type ApiErrorDetail = {
   msg?: string;
@@ -52,12 +53,6 @@ type ApplicationsResponseData = {
   applications: UserApplication[];
 };
 
-function getApiBaseUrl() {
-  return (
-    process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/+$/, '') ?? 'http://localhost:5000/api'
-  );
-}
-
 function normalizeErrorMessage(message: string, errors?: ApiErrorDetail[]) {
   if (!errors || errors.length === 0) {
     return message;
@@ -67,7 +62,7 @@ function normalizeErrorMessage(message: string, errors?: ApiErrorDetail[]) {
 }
 
 async function request<T>(path: string, init: RequestInit = {}) {
-  const response = await fetch(`${getApiBaseUrl()}${path}`, {
+  const response = await fetch(`${getClientApiBaseUrl()}${path}`, {
     ...init,
     headers: {
       'Content-Type': 'application/json',

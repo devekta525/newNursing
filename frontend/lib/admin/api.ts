@@ -1,5 +1,6 @@
 import { readAuthSession } from '@/lib/userAuth/storage';
 import type { AuthUser } from '@/lib/userAuth/types';
+import { getClientApiBaseUrl } from '@/lib/api/client';
 
 export type AdminRole = 'ADMIN' | 'SUB_ADMIN';
 
@@ -131,12 +132,6 @@ type EnquiriesResponseData = {
   };
 };
 
-function getApiBaseUrl() {
-  return (
-    process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/+$/, '') ?? 'http://localhost:5000/api'
-  );
-}
-
 function getAdminSession() {
   const session = readAuthSession();
 
@@ -176,7 +171,7 @@ function extractFilenameFromDisposition(contentDisposition: string | null) {
 async function request<T>(path: string, init: RequestInit = {}) {
   const session = getAdminSession();
 
-  const response = await fetch(`${getApiBaseUrl()}${path}`, {
+  const response = await fetch(`${getClientApiBaseUrl()}${path}`, {
     ...init,
     headers: {
       'Content-Type': 'application/json',
@@ -293,7 +288,7 @@ export async function getAdminUsers(params?: {
 export async function downloadAdminUsersReport() {
   const session = getAdminSession();
 
-  const response = await fetch(`${getApiBaseUrl()}/admin/users/report`, {
+  const response = await fetch(`${getClientApiBaseUrl()}/admin/users/report`, {
     headers: {
       Authorization: `Bearer ${session.accessToken}`,
       Accept: 'text/csv',

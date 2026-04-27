@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   },
 }
 
+const isVercelAnalyticsEnabled =
+  process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED === 'true';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,7 +46,7 @@ export default function RootLayout({
         <AuthProvider>
           <PageTransition>{children}</PageTransition>
           <WhatsAppButton />
-          <Analytics />
+          {isVercelAnalyticsEnabled ? <Analytics /> : null}
         </AuthProvider>
       </body>
     </html>

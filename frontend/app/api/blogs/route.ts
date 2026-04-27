@@ -1,13 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-function getBackendApiBaseUrl() {
-  return (
-    process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/+$/, '') ?? 'http://localhost:5000/api'
-  );
-}
+import { getMissingApiBaseUrlMessage, getServerApiBaseUrl } from '@/lib/api/server';
 
 export async function GET(request: NextRequest) {
-  const upstreamUrl = new URL(`${getBackendApiBaseUrl()}/blogs`);
+  const apiBaseUrl = getServerApiBaseUrl();
+
+  if (!apiBaseUrl) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: getMissingApiBaseUrlMessage(),
+      },
+      { status: 500 }
+    );
+  }
+
+  const upstreamUrl = new URL(`${apiBaseUrl}/blogs`);
   const incomingParams = request.nextUrl.searchParams;
 
   incomingParams.forEach((value, key) => {

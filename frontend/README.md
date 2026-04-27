@@ -16,6 +16,22 @@ Your project is live at:
 
 **[https://vercel.com/yashmoriyas-projects/v0-home-page-design](https://vercel.com/yashmoriyas-projects/v0-home-page-design)**
 
+### Backend API configuration
+
+Set this environment variable in Vercel before deploying the frontend:
+
+```bash
+API_BASE_URL=https://your-deployed-backend-domain.com/api
+```
+
+For local development, `NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api` can still be used with the local Express backend. In production, browser requests go to `/api/backend/*`, and that server-side proxy forwards them to `API_BASE_URL`. This prevents the live site from calling `localhost` or running into browser CORS issues.
+
+Vercel Web Analytics is disabled unless this is set:
+
+```bash
+NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED=true
+```
+
 ## Build your app
 
 Continue building your app on:
